@@ -127,7 +127,7 @@ export default function Home() {
         <div
           className="flex flex-col items-center justify-end flex-1 bg-cover relative"
           style={{
-            backgroundImage: `url('/images/hero_section3.jpg')`,
+            backgroundImage: `url('./images/hero_section3.jpg')`,
             backgroundPosition: "50% 35%",
             height: "100vh",
           }}
