@@ -12,6 +12,15 @@ export default function Home() {
 
   // Configurable scroll threshold for nav bar visibility (in pixels)
   const NAV_SCROLL_THRESHOLD = 100;
+  const navLinkStyle = {
+    fontSize: "clamp(0.5rem, 3vw, 0.9rem)",
+    fontWeight: 600,
+    lineHeight: 1.35,
+  };
+  const rsvpLinkStyle = {
+    ...navLinkStyle,
+    color: "#deaa00",
+  };
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -92,25 +101,25 @@ export default function Home() {
     <div ref={containerRef} className="min-h-screen flex flex-col bg-white">
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 px-8 py-6 flex gap-8 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-start gap-3 sm:gap-5 md:gap-8 transition-all duration-300"
         style={{
           backgroundColor: scrollY > NAV_SCROLL_THRESHOLD ? "white" : "transparent",
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        <a href="#home" className="text-sm font-semibold tracking-wide text-black hover:text-gray-400 transition-colors">
+        <a href="#home" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
           Home
         </a>
-        <a href="#story" className="text-sm font-semibold tracking-wide text-black hover:text-gray-400 transition-colors">
+        <a href="#story" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
           Our Story
         </a>
-        <a href="#details" className="text-sm font-semibold tracking-wide text-black hover:text-gray-400 transition-colors">
+        <a href="#details" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
           Wedding Details
         </a>
-        <a href="#dress" className="text-sm font-semibold tracking-wide text-black hover:text-gray-400 transition-colors">
+        <a href="#dress" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
           Dress Code
         </a>
-        <a href="#rsvp" className="text-sm font-semibold tracking-wide text-black hover:text-gray-400 transition-colors" style={{ color: "#deaa00" }}>
+        <a href="#rsvp" className="tracking-wide hover:text-gray-400 transition-colors" style={rsvpLinkStyle}>
           RSVP
         </a>
       </nav>
@@ -135,11 +144,11 @@ export default function Home() {
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}></div>
           
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}></div>
-          <div className="hero-text absolute z-10 text-black px-6" style={{ opacity: 0, right: "200px", top: "50%", transform: "translateY(-50%)" }}>
-            <h1 className="text-7xl md:text-7xl font-extrabold mb-4 tracking-widest text-black text-right" style={{ fontFamily: "var(--font-cormorant)" }}>
-              Luc and Gail
+          <div className="hero-text absolute z-10 text-black w-1/2" style={{ opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(1rem, 16vw, 14rem)" }}>
+            <h1 className="text-black text-right" style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
+              Luc & Gail
             </h1>
-            <p className="text-6xl md:text-6xl font-medium text-black text-right" style={{ fontFamily: "var(--font-italianno)", marginRight: "18px"}} >
+            <p className="text-black text-right" style={{ fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, marginRight: "clamp(0.125rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
               are getting married!
               {/* Under Jehovah's blessing, they begin their life as one. */}
             </p>
