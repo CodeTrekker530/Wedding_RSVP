@@ -162,6 +162,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+        
       </section>
 
       {/* Story Section 2 */}
