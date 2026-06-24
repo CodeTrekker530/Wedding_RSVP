@@ -13,9 +13,9 @@ export default function Home() {
   // Configurable scroll threshold for nav bar visibility (in pixels)
   const NAV_SCROLL_THRESHOLD = 100;
   const navLinkStyle = {
-    fontSize: "clamp(0.5rem, 3vw, 0.9rem)",
+    fontSize: "clamp(0.5rem, 3vw, 1rem)",
     fontWeight: 600,
-    lineHeight: 1.35,
+    lineHeight: 1.5,
   };
   const rsvpLinkStyle = {
     ...navLinkStyle,
@@ -144,11 +144,11 @@ export default function Home() {
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}></div>
           
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}></div>
-          <div className="hero-text absolute z-10 text-black w-1/2" style={{ opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(1rem, 16vw, 14rem)" }}>
+          <div className="hero-text absolute z-10 text-black w-1/2" style={{ opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(0.5rem, 12vw, 14rem)" }}>
             <h1 className="text-black text-right" style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
               Luc & Gail
             </h1>
-            <p className="text-black text-right" style={{ fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, marginRight: "clamp(0.125rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
+            <p className="text-black text-right" style={{ fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
               are getting married!
               {/* Under Jehovah's blessing, they begin their life as one. */}
             </p>
