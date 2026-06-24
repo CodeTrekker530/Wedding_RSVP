@@ -120,8 +120,9 @@ export default function Home() {
     event.preventDefault();
     setIsSubmittingRsvp(true);
     setRsvpStatus("");
+    const form = event.currentTarget;
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload = {
       guests: rsvpGuests,
       attendeeCount: formData.get("attendeeCount"),
@@ -142,7 +143,7 @@ export default function Home() {
         throw new Error(data.message || "Could not send RSVP.");
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setRsvpStatus(data.message || "RSVP saved. Thank you!");
     } catch (error) {
       setRsvpStatus(error instanceof Error ? error.message : "Could not send RSVP.");
