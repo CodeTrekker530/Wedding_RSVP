@@ -52,8 +52,22 @@ function getPrivateKey() {
     .trim();
 }
 
+function getClientEmail() {
+  const rawClientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL?.trim();
+
+  if (!rawClientEmail) {
+    return undefined;
+  }
+
+  return rawClientEmail
+    .replace(/^"(.*)"$/, "$1")
+    .replace(/^'(.*)'$/, "$1")
+    .replace(/,$/, "")
+    .trim();
+}
+
 function createServiceAccountJwt() {
-  const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
+  const clientEmail = getClientEmail();
   const privateKey = getPrivateKey();
 
   if (!clientEmail || !privateKey) {
