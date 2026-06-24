@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## RSVP Google Sheet Setup
+
+The RSVP form posts to `/api/rsvp`, which appends each submission to a Google Sheet.
+
+1. Create a Google Cloud service account and download its JSON key.
+2. Create a Google Sheet with a tab named `RSVP`.
+3. Add these headers in row 1: `Submitted At`, `Group ID`, `First Name`, `Last Name`, `Attending`, `Number of Attendees`, `Message`.
+4. Share the Google Sheet with the service account email as an editor.
+5. Copy `.env.example` to `.env.local` and fill in:
+   - `GOOGLE_SHEETS_CLIENT_EMAIL`
+   - `GOOGLE_SHEETS_PRIVATE_KEY`
+   - `GOOGLE_SHEETS_SPREADSHEET_ID`
+   - `GOOGLE_SHEETS_SHEET_NAME`
+
+On Vercel, add the same variables in Project Settings → Environment Variables.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
