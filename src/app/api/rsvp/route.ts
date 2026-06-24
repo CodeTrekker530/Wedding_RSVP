@@ -126,17 +126,15 @@ function validatePayload(payload: RsvpPayload) {
       attending: guest.attending === "no" ? "No" : "Yes",
     }))
     .filter((guest) => guest.firstName && guest.lastName);
-  const attendeeCount = payload.attendeeCount?.trim();
   const message = payload.message?.trim() || "";
 
   // Make attendeeCount optional — only require at least one valid guest
-  const normalizedAttendeeCount = payload.attendeeCount?.trim() || "";
 
   if (!guests?.length) {
     return null;
   }
 
-  return { guests, attendeeCount: normalizedAttendeeCount, message };
+  return { guests, message };
 }
 
 export async function POST(request: Request) {
@@ -182,7 +180,6 @@ export async function POST(request: Request) {
             guest.firstName,
             guest.lastName,
             guest.attending,
-            index === 0 ? payload.attendeeCount : "",
             index === 0 ? payload.message : "",
           ]),
         }),
