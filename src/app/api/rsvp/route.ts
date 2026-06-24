@@ -91,7 +91,8 @@ async function getAccessToken() {
   });
 
   if (!response.ok) {
-    throw new Error("Could not authenticate with Google Sheets.");
+    const errorText = await response.text();
+    throw new Error(`Could not authenticate with Google Sheets: ${errorText}`);
   }
 
   const data = (await response.json()) as { access_token?: string };
@@ -182,6 +183,15 @@ export async function POST(request: Request) {
         {
           message:
             "Google private key is not in valid PEM format. Paste the service account private_key value exactly, including BEGIN/END lines, and keep literal \\n line breaks or real new lines.",
+        },
+        { status: 500 }
+      );
+    }
+
+    if (error instanceof Error && error.message.startsWith("Could not authenticate with Google Sheets:")) {
+      return NextResponse.json(
+        {
+          message: error.message,
         },
         { status: 500 }
       );
