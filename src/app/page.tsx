@@ -25,7 +25,6 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [rsvpStatus, setRsvpStatus] = useState("");
   const [isSubmittingRsvp, setIsSubmittingRsvp] = useState(false);
-  const [attendeeCount, setAttendeeCount] = useState("");
   const [message, setMessage] = useState("");
   const [rsvpGuests, setRsvpGuests] = useState<RsvpGuest[]>([
     { id: "guest-1", firstName: "", lastName: "", attending: "yes" },
@@ -158,7 +157,6 @@ export default function Home() {
       }
 
       setRsvpGuests([{ id: "guest-1", firstName: "", lastName: "", attending: "yes" }]);
-      // setAttendeeCount("");
       setMessage("");
       setRsvpStatus(data.message || "RSVP saved. Thank you!");
     } catch (error) {
@@ -286,8 +284,8 @@ export default function Home() {
             Join us as we celebrate our love and create memories together.
           </p>
           <div className="text-base font-light text-gray-700 space-y-4">
-            <p><strong>Date:</strong> [Your Wedding Date]</p>
-            <p><strong>Time:</strong> [Your Wedding Time]</p>
+            <p><strong>Date:</strong> September 25, 2026</p>
+            <p><strong>Time:</strong> 9:00 AM</p>
             <p><strong>Location:</strong> [Your Venue]</p>
           </div>
         </div>

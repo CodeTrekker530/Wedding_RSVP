@@ -129,11 +129,14 @@ function validatePayload(payload: RsvpPayload) {
   const attendeeCount = payload.attendeeCount?.trim();
   const message = payload.message?.trim() || "";
 
-  if (!guests?.length || !attendeeCount) {
+  // Make attendeeCount optional — only require at least one valid guest
+  const normalizedAttendeeCount = payload.attendeeCount?.trim() || "";
+
+  if (!guests?.length) {
     return null;
   }
 
-  return { guests, attendeeCount, message };
+  return { guests, attendeeCount: normalizedAttendeeCount, message };
 }
 
 export async function POST(request: Request) {
