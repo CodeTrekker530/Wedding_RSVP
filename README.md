@@ -30,7 +30,7 @@ The RSVP form posts to `/api/rsvp`, which appends each submission to a Google Sh
 4. Share the Google Sheet with the service account email as an editor.
 5. Copy `.env.example` to `.env.local` and fill in:
    - `GOOGLE_SHEETS_CLIENT_EMAIL`
-   - `GOOGLE_SHEETS_PRIVATE_KEY`
+   - `GOOGLE_SHEETS_PRIVATE_KEY` (paste the service account `private_key` value, or the full JSON blob)
    - `GOOGLE_SHEETS_SPREADSHEET_ID`
    - `GOOGLE_SHEETS_SHEET_NAME`
 

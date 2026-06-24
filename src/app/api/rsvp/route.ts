@@ -1,4 +1,4 @@
-import { createSign, randomUUID } from "crypto";
+import { createPrivateKey, createSign, randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -28,7 +28,28 @@ function base64UrlEncode(value: string) {
 }
 
 function getPrivateKey() {
-  return process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const rawPrivateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.trim();
+
+  if (!rawPrivateKey) {
+    return undefined;
+  }
+
+  if (rawPrivateKey.startsWith("{")) {
+    try {
+      const parsed = JSON.parse(rawPrivateKey) as { private_key?: string };
+      if (parsed.private_key) {
+        return parsed.private_key.replace(/\\n/g, "\n").trim();
+      }
+    } catch {
+      // Fall through to the raw value below.
+    }
+  }
+
+  return rawPrivateKey
+    .replace(/^"(.*)"$/, "$1")
+    .replace(/^'(.*)'$/, "$1")
+    .replace(/\\n/g, "\n")
+    .trim();
 }
 
 function createServiceAccountJwt() {
@@ -51,7 +72,8 @@ function createServiceAccountJwt() {
     })
   );
   const unsignedToken = `${header}.${payload}`;
-  const signature = createSign("RSA-SHA256").update(unsignedToken).sign(privateKey, "base64url");
+  const keyObject = createPrivateKey({ key: privateKey, format: "pem" });
+  const signature = createSign("RSA-SHA256").update(unsignedToken).sign(keyObject, "base64url");
 
   return `${unsignedToken}.${signature}`;
 }
@@ -154,6 +176,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "RSVP saved. Thank you!" });
   } catch (error) {
     console.error(error);
+
+    if (error instanceof Error && error.message.includes("DECODER routines")) {
+      return NextResponse.json(
+        {
+          message:
+            "Google private key is not in valid PEM format. Paste the service account private_key value exactly, including BEGIN/END lines, and keep literal \\n line breaks or real new lines.",
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { message: "Something went wrong while saving your RSVP." },
