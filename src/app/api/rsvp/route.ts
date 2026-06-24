@@ -171,14 +171,16 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          values: payload.guests.map((guest) => [
+          // Write attendeeCount/message only once per submission group.
+          // This prevents the same attendeeCount from appearing N times (once per guest row).
+          values: payload.guests.map((guest, index) => [
             submittedAt,
             groupId,
             guest.firstName,
             guest.lastName,
             guest.attending,
-            payload.attendeeCount,
-            payload.message,
+            index === 0 ? payload.attendeeCount : "",
+            index === 0 ? payload.message : "",
           ]),
         }),
       }

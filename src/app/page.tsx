@@ -25,9 +25,12 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [rsvpStatus, setRsvpStatus] = useState("");
   const [isSubmittingRsvp, setIsSubmittingRsvp] = useState(false);
+  const [attendeeCount, setAttendeeCount] = useState("");
+  const [message, setMessage] = useState("");
   const [rsvpGuests, setRsvpGuests] = useState<RsvpGuest[]>([
     { id: "guest-1", firstName: "", lastName: "", attending: "yes" },
   ]);
+  const [countdownNow, setCountdownNow] = useState(() => new Date());
 
   // Configurable scroll threshold for nav bar visibility (in pixels)
   const NAV_SCROLL_THRESHOLD = 100;
@@ -40,6 +43,21 @@ export default function Home() {
     ...navLinkStyle,
     color: "#deaa00",
   };
+  const weddingDate = new Date("2026-09-25T09:00:00");
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCountdownNow(new Date());
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const countdownMs = Math.max(0, weddingDate.getTime() - countdownNow.getTime());
+  const countdownDays = Math.floor(countdownMs / (1000 * 60 * 60 * 24));
+  const countdownHours = Math.floor((countdownMs / (1000 * 60 * 60)) % 24);
+  const countdownMinutes = Math.floor((countdownMs / (1000 * 60)) % 60);
+  const countdownSeconds = Math.floor((countdownMs / 1000) % 60);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -120,13 +138,9 @@ export default function Home() {
     event.preventDefault();
     setIsSubmittingRsvp(true);
     setRsvpStatus("");
-    const form = event.currentTarget;
-
-    const formData = new FormData(form);
     const payload = {
       guests: rsvpGuests,
-      attendeeCount: formData.get("attendeeCount"),
-      message: formData.get("message"),
+      message,
     };
 
     try {
@@ -143,7 +157,9 @@ export default function Home() {
         throw new Error(data.message || "Could not send RSVP.");
       }
 
-      form.reset();
+      setRsvpGuests([{ id: "guest-1", firstName: "", lastName: "", attending: "yes" }]);
+      // setAttendeeCount("");
+      setMessage("");
       setRsvpStatus(data.message || "RSVP saved. Thank you!");
     } catch (error) {
       setRsvpStatus(error instanceof Error ? error.message : "Could not send RSVP.");
@@ -176,7 +192,7 @@ export default function Home() {
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        <a href="#story" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
+        <a href="#home" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
           Our Story
         </a>
         <a href="#details" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
@@ -240,6 +256,29 @@ export default function Home() {
       {/* Wedding Details Section */}
       <section id="details" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-white to-gray-50 px-6">
         <div className="max-w-3xl text-center">
+          <div className="mb-10 rounded-3xl border border-gray-200 bg-white/80 px-6 py-8 shadow-sm">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-gray-500">
+              Countdown to the big day
+            </p>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              <div className="rounded-2xl bg-gray-50 px-4 py-5">
+                <div className="text-4xl font-semibold text-gray-900">{countdownDays}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Days</div>
+              </div>
+              <div className="rounded-2xl bg-gray-50 px-4 py-5">
+                <div className="text-4xl font-semibold text-gray-900">{countdownHours}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Hours</div>
+              </div>
+              <div className="rounded-2xl bg-gray-50 px-4 py-5">
+                <div className="text-4xl font-semibold text-gray-900">{countdownMinutes}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Minutes</div>
+              </div>
+              <div className="rounded-2xl bg-gray-50 px-4 py-5">
+                <div className="text-4xl font-semibold text-gray-900">{countdownSeconds}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Seconds</div>
+              </div>
+            </div>
+          </div>
           <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide text-gray-900">
             Wedding Details
           </h2>
@@ -373,7 +412,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label htmlFor="attendeeCount" className="block text-sm font-semibold tracking-wide text-gray-700 mb-2">
+              {/* <label htmlFor="attendeeCount" className="block text-sm font-semibold tracking-wide text-gray-700 mb-2">
                 Number of Attendees
               </label>
               <input
@@ -382,9 +421,10 @@ export default function Home() {
                 type="number"
                 min="0"
                 required
-                defaultValue="1"
+                value={attendeeCount}
+                onChange={(event) => setAttendeeCount(event.target.value)}
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 outline-none focus:border-gray-500"
-              />
+              /> */}
             </div>
 
             <div>
@@ -395,6 +435,8 @@ export default function Home() {
                 id="message"
                 name="message"
                 rows={4}
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 outline-none focus:border-gray-500"
               />
             </div>
