@@ -74,7 +74,7 @@ const weddingDetailTabs: Array<{
     description: "A simple and heartfelt celebration with meaningful moments throughout the day.",
     items: [
       { label: "Start of Ceremony", value: "9:30 AM — Exchanging of vows and becoming one." },
-      { label: "Portrait Session", value: "10:30 AM — Capturing the joy of this special day" },
+      { label: "Picture Taking Session", value: "10:30 AM — Capturing the joy of this special day" },
       { label: "Gather and Mingle", value: "11:00 AM — Guests are invited to enjoy light refreshements while the couple completes their portrait session" },
       { label: "Lunch", value: "12:00 NN — A luncheon will be served for all the guests" },
       { label: "Reception Begins", value: "1:00 PM — Join us as we continue the celebration and create laasting memories together" },
@@ -270,6 +270,7 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [rsvpStatus, setRsvpStatus] = useState("");
   const [isSubmittingRsvp, setIsSubmittingRsvp] = useState(false);
+  const [showRsvpModal, setShowRsvpModal] = useState(false);
   const [message, setMessage] = useState("");
   const [rsvpGuests, setRsvpGuests] = useState<RsvpGuest[]>([
     { id: "guest-1", firstName: "", lastName: "", attending: "yes" },
@@ -405,6 +406,7 @@ export default function Home() {
       setRsvpGuests([{ id: "guest-1", firstName: "", lastName: "", attending: "yes" }]);
       setMessage("");
       setRsvpStatus(data.message || "RSVP saved. Thank you!");
+      setShowRsvpModal(true);
     } catch (error) {
       setRsvpStatus(error instanceof Error ? error.message : "Could not send RSVP.");
     } finally {
@@ -438,6 +440,10 @@ export default function Home() {
       top: Math.max(0, targetTop),
       behavior: "smooth",
     });
+  }
+
+  function closeRsvpModal() {
+    setShowRsvpModal(false);
   }
 
   return (
@@ -606,6 +612,40 @@ export default function Home() {
         </div>
       </section>
 
+      {showRsvpModal ? (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4">
+          <div className="w-full max-w-md rounded-[2rem] bg-white p-8 text-center shadow-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: themeColor }}>
+              Thank You
+            </p>
+            <h3 className="mt-3 text-3xl font-semibold tracking-wide" style={{ color: themeColor }}>
+              Thank you for sending your RSVP
+            </h3>
+            <p className="mt-4 text-base leading-relaxed" style={{ color: themeColor }}>
+              We truly appreciate your response and are so grateful to celebrate with you.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <a
+                href="/files/Luc & Gail's RSVP.pdf"
+                download
+                className="rounded-full px-6 py-3 font-semibold transition-colors"
+                style={{ backgroundColor: themeColor, color: "white" }}
+              >
+                Download RSVP
+              </a>
+              <button
+                type="button"
+                onClick={closeRsvpModal}
+                className="rounded-full border border-[#521322]/20 px-6 py-3 font-semibold transition-colors"
+                style={{ color: themeColor }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {/* RSVP Section */}
       <section id="rsvp" className="min-h-screen w-full flex items-center justify-center px-6 py-24" style={{ backgroundColor: ivoryColor }}>
         <div className="w-full max-w-2xl">
@@ -751,6 +791,15 @@ export default function Home() {
             >
               {isSubmittingRsvp ? "Sending..." : "Send RSVP"}
             </button>
+
+            <a
+              href="/files/Luc & Gail's RSVP.pdf"
+              download
+              className="block text-center text-sm font-semibold underline transition-opacity hover:opacity-80"
+              style={{ color: themeColor }}
+            >
+              Download soft copy of RSVP
+            </a>
 
             {rsvpStatus ? (
               <p className="text-center text-sm font-medium" style={{ color: themeColor }} aria-live="polite">
