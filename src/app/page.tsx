@@ -132,7 +132,8 @@ export default function Home() {
   const [rsvpGuests, setRsvpGuests] = useState<RsvpGuest[]>([
     { id: "guest-1", firstName: "", lastName: "", attending: "yes" },
   ]);
-  const [countdownNow, setCountdownNow] = useState(() => new Date());
+  const weddingDate = new Date("2026-09-25T09:30:00");
+  const [countdownNow, setCountdownNow] = useState<Date>(() => new Date(weddingDate.getTime()));
 
   // Configurable scroll threshold for nav bar visibility (in pixels)
   const NAV_SCROLL_THRESHOLD = 100;
@@ -146,7 +147,6 @@ export default function Home() {
     ...navLinkStyle,
     color: "#deaa00",
   };
-  const weddingDate = new Date("2026-09-25T09:30:00");
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -420,17 +420,46 @@ export default function Home() {
       </section>
 
       {/* Dress Code Section */}
-      <section id="dress" className="min-h-screen w-full flex items-center justify-center px-6" style={{ backgroundColor: ivoryColor }}>
-        <div className="max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
-            Dress Code
-          </h2>
-          <p className="text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
-            Elegant and formal attire, please. We invite you to celebrate in style.
+      <section id="dress" className="min-h-screen w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: "#A78A9C" }}>
+        <div className="w-full max-w-4xl rounded-[2rem] border border-white/40 bg-white/60 px-6 py-10 text-center shadow-lg backdrop-blur-sm sm:px-10 md:px-14 md:py-14">
+          <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.35em]" style={{ color: "#000000" }}>
+            DRESS CODE
           </p>
-          <div className="text-base font-light space-y-4" style={{ color: themeColor }}>
-            <p><strong>For Her:</strong> Evening gown or formal dress</p>
-            <p><strong>For Him:</strong> Tuxedo or formal suit</p>
+          <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed" style={{ color: "#000000" }}>
+            <p>
+              We would be delighted to have you join us in your finest attire, dressed in the following colors, as we celebrate this special occasion in elegance, beauty, and harmony.
+            </p>
+            <p>
+              Gentlemen are invited to wear a black suit, coat, or long-sleeved dress shirt with a tie, while ladies are encouraged to wear long, elegant dresses in satin or other formal fabrics.
+            </p>
+            <p>
+              In keeping with the spirit of 1 Timothy 2:9, we kindly request modest and dignified attire and grooming.
+            </p>
+          </div>
+
+          <div className="mt-10 rounded-[1.5rem] border border-white/40 bg-white/40 p-6 sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: "#000000" }}>
+              Dress Code Colors
+            </p>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-center">
+              {[
+                { color: "#E4BEB4", name: "Rose Pink" },
+                { color: "#DA979B", name: "Dusty Rose" },
+                { color: "#9C5C62", name: "Muted Burgundy" },
+              ].map((swatch) => (
+                <div key={swatch.color} className="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-white/80 px-4 py-4 shadow-sm">
+                  <div className="h-10 w-10" style={{ backgroundColor: swatch.color }} />
+                  <div className="text-left">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em]" style={{ color: "#000000" }}>
+                      {swatch.color}
+                    </p>
+                    <p className="text-sm" style={{ color: "#000000" }}>
+                      {swatch.name}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -439,7 +468,7 @@ export default function Home() {
       <section id="rsvp" className="min-h-screen w-full flex items-center justify-center px-6 py-24" style={{ backgroundColor: ivoryColor }}>
         <div className="w-full max-w-2xl">
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-light mb-4 tracking-wide" style={{ color: themeColor }}>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide" style={{ color: themeColor }}>
               RSVP
             </h2>
             <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: themeColor }}>
