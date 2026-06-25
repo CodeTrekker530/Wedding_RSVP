@@ -13,6 +13,109 @@ type RsvpGuest = {
   attending: string;
 };
 
+type WeddingDetailTabKey = "Venue" | "Program" | "Entourage";
+
+const themeColor = "#521322";
+const ivoryColor = "#FFFFF0";
+const countdownSectionColor = "#FFF1E1";
+
+const weddingDetailTabs: Array<{
+  key: WeddingDetailTabKey;
+  label: string;
+  title: string;
+  description: string;
+  items: Array<{ label: string; value: string }>;
+}> = [
+  {
+    key: "Venue",
+    label: "Venue",
+    title: "The Venue",
+    description: "We’ll gather in a warm and elegant setting for a day of celebration and joy.",
+    items: [
+      { label: "Date", value: "September 25, 2025" },
+      { label: "Time", value: "9:30 AM" },
+      { label: "Location", value: "Leynes St., Brgy. Lalaan II, Silang, Cavite 4118, Philippines." },
+      { label: "Venue", value: "Tree House Mansion" },
+    ],
+  },
+  {
+    key: "Program",
+    label: "Program",
+    title: "The Day's Events",
+    description: "A simple and heartfelt celebration with meaningful moments throughout the day.",
+    items: [
+      { label: "Start of Ceremony", value: "9:30 AM — Start of Ceremony" },
+      { label: "Portrait Session", value: "10:30 AM — Portrait Session" },
+      { label: "Gather and Mingle", value: "11:00 AM — Gather and Mingle" },
+      { label: "Lunch", value: "12:00 NN — Lunch" },
+      { label: "Reception Begins", value: "1:00 PM — Reception Begins" },
+
+    ],
+  },
+  {
+    key: "Entourage",
+    label: "Entourage",
+    title: "Our Entourage",
+    description: "These are the people who will stand beside us and help make the day unforgettable.",
+    items: [
+      { label: "Officiating Minister", value: "Ferdinand Ramos" },
+      { label: "Best Man", value: "Jonard Jake M. Monilla" },
+    ],
+  },
+];
+
+function WeddingDetailsTabs() {
+  const [activeTab, setActiveTab] = useState<WeddingDetailTabKey>("Venue");
+  const activeContent = weddingDetailTabs.find((tab) => tab.key === activeTab) ?? weddingDetailTabs[0];
+
+  return (
+    <div className="mx-auto flex w-full max-w-3xl flex-col items-center">
+      <div className="mx-auto inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-[#521322]/15 bg-white/80 p-1 shadow-sm">
+        {weddingDetailTabs.map((tab) => {
+          const isActive = tab.key === activeTab;
+
+          return (
+            <button
+              key={tab.key}
+              type="button"
+              onClick={() => setActiveTab(tab.key)}
+              className="rounded-full px-4 py-2 text-sm font-semibold transition-all"
+              style={{
+                backgroundColor: isActive ? themeColor : "transparent",
+                color: isActive ? "white" : themeColor,
+              }}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-8 w-full rounded-3xl border border-[#521322]/10 bg-white/80 p-6 text-center shadow-sm md:p-8">
+        <h3 className="text-2xl font-semibold tracking-wide" style={{ color: themeColor }}>
+          {activeContent.title}
+        </h3>
+        <p className="mt-3 text-base leading-relaxed" style={{ color: themeColor }}>
+          {activeContent.description}
+        </p>
+
+        <div className="mt-6 space-y-3">
+          {activeContent.items.map((item) => (
+            <div key={item.label} className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+                {item.label}
+              </p>
+              <p className="mt-1 text-base leading-relaxed" style={{ color: themeColor }}>
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const createRsvpGuest = (): RsvpGuest => ({
   id: `guest-${Date.now()}-${Math.random().toString(36).slice(2)}`,
   firstName: "",
@@ -37,12 +140,13 @@ export default function Home() {
     fontSize: "clamp(0.5rem, 3vw, 1rem)",
     fontWeight: 600,
     lineHeight: 1.5,
+    color: themeColor,
   };
   const rsvpLinkStyle = {
     ...navLinkStyle,
     color: "#deaa00",
   };
-  const weddingDate = new Date("2026-09-25T09:00:00");
+  const weddingDate = new Date("2026-09-25T09:30:00");
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -118,8 +222,8 @@ export default function Home() {
           duration: 1,
           scrollTrigger: {
             trigger: section,
-            start: "top center",
-            end: "center center",
+            start: "top bottom",
+            end: "center bottom",
             scrub: 1,
             markers: false,
           },
@@ -180,8 +284,22 @@ export default function Home() {
     setRsvpGuests((guests) => guests.filter((guest) => guest.id !== id));
   }
 
+  function scrollToSection(targetId: string) {
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    const navOffset = 96;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: "smooth",
+    });
+  }
+
   return (
-    <div ref={containerRef} className="min-h-screen flex flex-col bg-white">
+    <div ref={containerRef} className="min-h-screen flex flex-col" style={{ backgroundColor: ivoryColor }}>
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
         className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-start gap-3 sm:gap-5 md:gap-8 transition-all duration-300"
@@ -190,16 +308,24 @@ export default function Home() {
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        <a href="#home" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
+        <a href="#home" className="tracking-wide transition-colors" style={navLinkStyle}>
           Our Story
         </a>
-        <a href="#details" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
+        <a
+          href="#countdown"
+          className="tracking-wide transition-colors"
+          style={navLinkStyle}
+          onClick={(event) => {
+            event.preventDefault();
+            scrollToSection("countdown");
+          }}
+        >
           Wedding Details
         </a>
-        <a href="#dress" className="tracking-wide text-black hover:text-gray-400 transition-colors" style={navLinkStyle}>
+        <a href="#dress" className="tracking-wide transition-colors" style={navLinkStyle}>
           Dress Code
         </a>
-        <a href="#rsvp" className="tracking-wide hover:text-gray-400 transition-colors" style={rsvpLinkStyle}>
+        <a href="#rsvp" className="tracking-wide transition-colors" style={rsvpLinkStyle}>
           RSVP
         </a>
       </nav>
@@ -224,11 +350,11 @@ export default function Home() {
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}></div>
           
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}></div>
-          <div className="hero-text absolute z-10 text-black w-1/2" style={{ opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(0.5rem, 12vw, 14rem)" }}>
-            <h1 className="text-black text-right" style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
+          <div className="hero-text absolute z-10 w-1/2" style={{ color: themeColor, opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(0.5rem, 12vw, 14rem)" }}>
+            <h1 className="text-right" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
               Luc & Gail
             </h1>
-            <p className="text-black text-right" style={{ fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
+            <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
               are getting married!
               {/* Under Jehovah's blessing, they begin their life as one. */}
             </p>
@@ -238,12 +364,12 @@ export default function Home() {
       </section>
 
       {/* Story Section 2 */}
-      <section id="story" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-white to-gray-50 px-6">
+      <section id="story" className="min-h-screen w-full flex items-center justify-center px-6" style={{ backgroundColor: ivoryColor }}>
         <div className="max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
             How We Met
           </h2>
-          <p className="text-lg md:text-xl font-light leading-relaxed text-gray-700 mb-8">
+          <p className="text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
             It was a beautiful day when our paths crossed. From that moment on,
             we knew our story was just beginning. Every laugh, every adventure,
             and every quiet moment has been a gift.
@@ -251,56 +377,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Wedding Details Section */}
-      <section id="details" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-white to-gray-50 px-6">
-        <div className="max-w-3xl text-center">
-          <div className="mb-10 rounded-3xl border border-gray-200 bg-white/80 px-6 py-8 shadow-sm">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-gray-500">
+      {/* Countdown Section */}
+      <section id="countdown" className="w-full flex items-center justify-center px-6 py-8" style={{ backgroundColor: countdownSectionColor }}>
+        <div className="w-full max-w-3xl text-center">
+          <div style={{ backgroundColor: countdownSectionColor }}>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: themeColor }}>
               Countdown to the big day
             </p>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold text-gray-900">{countdownDays}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Days</div>
+                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownDays}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Days</div>
               </div>
               <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold text-gray-900">{countdownHours}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Hours</div>
+                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownHours}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Hours</div>
               </div>
               <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold text-gray-900">{countdownMinutes}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Minutes</div>
+                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownMinutes}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Minutes</div>
               </div>
               <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold text-gray-900">{countdownSeconds}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-gray-500">Seconds</div>
+                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownSeconds}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Seconds</div>
               </div>
             </div>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide text-gray-900">
-            Wedding Details
-          </h2>
-          <p className="text-lg md:text-xl font-light leading-relaxed text-gray-700 mb-8">
-            Join us as we celebrate our love and create memories together.
-          </p>
-          <div className="text-base font-light text-gray-700 space-y-4">
-            <p><strong>Date:</strong> September 25, 2026</p>
-            <p><strong>Time:</strong> 9:00 AM</p>
-            <p><strong>Location:</strong> [Your Venue]</p>
           </div>
         </div>
       </section>
 
+      {/* Wedding Details Section */}
+      <section id="details" className="w-full flex items-center justify-center px-6 py-16" style={{ backgroundColor: ivoryColor }}>
+        <div className="w-full max-w-4xl text-center">
+          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
+            Wedding Details
+          </h2>
+          <p className="mx-auto max-w-2xl text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
+            Explore the venue, program, and our entourage through the tabs below.
+          </p>
+          <WeddingDetailsTabs />
+        </div>
+      </section>
+
       {/* Dress Code Section */}
-      <section id="dress" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-gray-50 to-white px-6">
+      <section id="dress" className="min-h-screen w-full flex items-center justify-center px-6" style={{ backgroundColor: ivoryColor }}>
         <div className="max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
             Dress Code
           </h2>
-          <p className="text-lg md:text-xl font-light leading-relaxed text-gray-700 mb-8">
+          <p className="text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
             Elegant and formal attire, please. We invite you to celebrate in style.
           </p>
-          <div className="text-base font-light text-gray-700 space-y-4">
+          <div className="text-base font-light space-y-4" style={{ color: themeColor }}>
             <p><strong>For Her:</strong> Evening gown or formal dress</p>
             <p><strong>For Him:</strong> Tuxedo or formal suit</p>
           </div>
@@ -308,13 +436,13 @@ export default function Home() {
       </section>
 
       {/* RSVP Section */}
-      <section id="rsvp" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-white to-gray-50 px-6 py-24">
+      <section id="rsvp" className="min-h-screen w-full flex items-center justify-center px-6 py-24" style={{ backgroundColor: ivoryColor }}>
         <div className="w-full max-w-2xl">
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-light mb-4 tracking-wide text-gray-900">
+            <h2 className="text-4xl md:text-5xl font-light mb-4 tracking-wide" style={{ color: themeColor }}>
               RSVP
             </h2>
-            <p className="text-lg md:text-xl font-light leading-relaxed text-gray-700">
+            <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: themeColor }}>
               We would love to know if you can celebrate with us.
             </p>
           </div>
@@ -324,14 +452,15 @@ export default function Home() {
               {rsvpGuests.map((guest, index) => (
                 <div key={guest.id} className="rounded-2xl border border-gray-200 p-4 space-y-4">
                   <div className="flex items-center justify-between gap-4">
-                    <h3 className="text-xl font-semibold tracking-wide text-gray-700">
+                    <h3 className="text-xl font-semibold tracking-wide" style={{ color: themeColor }}>
                       Guest {index + 1}
                     </h3>
                     {rsvpGuests.length > 1 ? (
                       <button
                         type="button"
                         onClick={() => removeRsvpGuest(guest.id)}
-                        className="text-sm font-semibold text-gray-500 transition-colors hover:text-red-500"
+                        className="text-sm font-semibold transition-colors hover:text-red-500"
+                        style={{ color: themeColor }}
                       >
                         Remove
                       </button>
@@ -340,7 +469,7 @@ export default function Home() {
 
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
-                      <label htmlFor={`${guest.id}-first-name`} className="block text-sm font-semibold tracking-wide text-gray-700 mb-2">
+                      <label htmlFor={`${guest.id}-first-name`} className="block text-sm font-semibold tracking-wide mb-2" style={{ color: themeColor }}>
                         First Name
                       </label>
                       <input
@@ -349,12 +478,13 @@ export default function Home() {
                         required
                         value={guest.firstName}
                         onChange={(event) => updateRsvpGuest(guest.id, "firstName", event.target.value)}
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 outline-none focus:border-gray-500"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-gray-500"
+                        style={{ color: themeColor }}
                       />
                     </div>
 
                     <div>
-                      <label htmlFor={`${guest.id}-last-name`} className="block text-sm font-semibold tracking-wide text-gray-700 mb-2">
+                      <label htmlFor={`${guest.id}-last-name`} className="block text-sm font-semibold tracking-wide mb-2" style={{ color: themeColor }}>
                         Last Name
                       </label>
                       <input
@@ -363,17 +493,18 @@ export default function Home() {
                         required
                         value={guest.lastName}
                         onChange={(event) => updateRsvpGuest(guest.id, "lastName", event.target.value)}
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 outline-none focus:border-gray-500"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-gray-500"
+                        style={{ color: themeColor }}
                       />
                     </div>
                   </div>
 
                   <fieldset>
-                    <legend className="block text-sm font-semibold tracking-wide text-gray-700 mb-2">
+                    <legend className="block text-sm font-semibold tracking-wide mb-2" style={{ color: themeColor }}>
                       Will this person attend?
                     </legend>
                     <div className="grid grid-cols-2 gap-3">
-                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "yes" ? "border-black bg-black text-white" : "border-gray-200 text-gray-700"}`}>
+                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "yes" ? "border-black bg-black text-white" : "border-gray-200"}`} style={{ color: guest.attending === "yes" ? "white" : themeColor }}>
                         <input
                           type="radio"
                           name={`${guest.id}-attending`}
@@ -384,7 +515,7 @@ export default function Home() {
                         />
                         Yes
                       </label>
-                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "border-black bg-black text-white" : "border-gray-200 text-gray-700"}`}>
+                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "border-black bg-black text-white" : "border-gray-200"}`} style={{ color: guest.attending === "no" ? "white" : themeColor }}>
                         <input
                           type="radio"
                           name={`${guest.id}-attending`}
@@ -403,7 +534,8 @@ export default function Home() {
               <button
                 type="button"
                 onClick={addRsvpGuest}
-                className="w-full rounded-2xl border border-dashed border-gray-300 px-4 py-4 text-lg font-semibold text-gray-700 transition-colors hover:border-gray-500 hover:text-black"
+                className="w-full rounded-2xl border border-dashed border-gray-300 px-4 py-4 text-lg font-semibold transition-colors hover:border-gray-500"
+                style={{ color: themeColor }}
               >
                 + Add Another Person
               </button>
@@ -426,7 +558,7 @@ export default function Home() {
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-semibold tracking-wide text-gray-700 mb-2">
+              <label htmlFor="message" className="block text-sm font-semibold tracking-wide mb-2" style={{ color: themeColor }}>
                 Optional Message
               </label>
               <textarea
@@ -435,20 +567,22 @@ export default function Home() {
                 rows={4}
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 outline-none focus:border-gray-500"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-gray-500"
+                style={{ color: themeColor }}
               />
             </div>
 
             <button
               type="submit"
               disabled={isSubmittingRsvp}
-              className="w-full rounded-full bg-black px-6 py-3 text-white font-semibold tracking-wide transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-400"
+              className="w-full rounded-full px-6 py-3 text-white font-semibold tracking-wide transition-colors disabled:cursor-not-allowed disabled:bg-gray-400"
+              style={{ backgroundColor: "black" }}
             >
               {isSubmittingRsvp ? "Sending..." : "Send RSVP"}
             </button>
 
             {rsvpStatus ? (
-              <p className="text-center text-sm font-medium text-gray-700" aria-live="polite">
+              <p className="text-center text-sm font-medium" style={{ color: themeColor }} aria-live="polite">
                 {rsvpStatus}
               </p>
             ) : null}
