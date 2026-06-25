@@ -14,10 +14,39 @@ type RsvpGuest = {
 };
 
 type WeddingDetailTabKey = "Venue" | "Program" | "Entourage";
+type EntourageItem = {
+  layout: "single" | "double" | "double-center" | "double-six";
+  label: string;
+  values: string[];
+  secondaryLabel?: string;
+  secondaryValues?: string[];
+};
 
 const themeColor = "#521322";
 const ivoryColor = "#FFFFF0";
 const countdownSectionColor = "#FFF1E1";
+
+const entourageItems: EntourageItem[] = [
+  { layout: "single", label: "OFFICIATING MINISTER", values: ["Ferdinand Ramos Jr."] },
+  {
+    layout: "double",
+    label: "PARENTS OF THE GROOM",
+    values: ["Joel M. Blanca", "Glenda T. Blanca"],
+    secondaryLabel: "PARENTS OF THE BRIDE",
+    secondaryValues: ["Gil Gino D. Briones", "Melanie Hope E. Briones"],
+  },
+  { layout: "single", label: "WITNESSES", values: ["Melvin Recongco", "Cynthia D. Amador"]},
+  { layout: "single", label: "BEST MAN", values: ["Jonard Jake M. Monilla"] },
+  {
+    layout: "double-six",
+    label: "GROOMSMEN",
+    values: ["Jared Nouwin M. Egipto", "Julian Abraham P. Blanca", "Judge Ethan T. Blanca", "Sebastian T. Blanca", "Alvin N. Tunay", "Glenn Adreanne F. Ampongan"],
+    secondaryLabel: "BRIDESMAID",
+    secondaryValues: ["Morice Jann E. Briones", "Jeneena Gabrielle E. Briones", "Keren-Happuch T. Blanca", "Sinead Brooklyn T. Blanca", "Rosalie T. Duclayan", "Alexandrei Dela Cruz"],
+  },
+  { layout: "single", label: "FLOWER GIRL", values: ["Anne Claire L. Briones"] },
+  { layout: "double-center", label: "RING BEARER", values: ["Aiden Caleb L. Briones"], secondaryLabel: "BIBLE BEARER", secondaryValues: ["Malco Heart B. Gamboa"] },
+];
 
 const weddingDetailTabs: Array<{
   key: WeddingDetailTabKey;
@@ -44,11 +73,11 @@ const weddingDetailTabs: Array<{
     title: "The Day's Events",
     description: "A simple and heartfelt celebration with meaningful moments throughout the day.",
     items: [
-      { label: "Start of Ceremony", value: "9:30 AM — Start of Ceremony" },
-      { label: "Portrait Session", value: "10:30 AM — Portrait Session" },
-      { label: "Gather and Mingle", value: "11:00 AM — Gather and Mingle" },
-      { label: "Lunch", value: "12:00 NN — Lunch" },
-      { label: "Reception Begins", value: "1:00 PM — Reception Begins" },
+      { label: "Start of Ceremony", value: "9:30 AM — Exchanging of vows and becoming one." },
+      { label: "Portrait Session", value: "10:30 AM — Capturing the joy of this special day" },
+      { label: "Gather and Mingle", value: "11:00 AM — Guests are invited to enjoy light refreshements while the couple completes their portrait session" },
+      { label: "Lunch", value: "12:00 NN — A luncheon will be served for all the guests" },
+      { label: "Reception Begins", value: "1:00 PM — Join us as we continue the celebration and create laasting memories together" },
 
     ],
   },
@@ -57,12 +86,111 @@ const weddingDetailTabs: Array<{
     label: "Entourage",
     title: "Our Entourage",
     description: "These are the people who will stand beside us and help make the day unforgettable.",
-    items: [
-      { label: "Officiating Minister", value: "Ferdinand Ramos" },
-      { label: "Best Man", value: "Jonard Jake M. Monilla" },
-    ],
+    items: [],
   },
 ];
+
+function renderEntourageCard(item: EntourageItem) {
+  if (item.layout === "single") {
+    return (
+      <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+          {item.label}
+        </p>
+        <div className="mt-2 space-y-1">
+          {item.values.map((value) => (
+            <p key={value} className="text-base leading-relaxed" style={{ color: themeColor }}>
+              {value}
+            </p>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (item.layout === "double") {
+    return (
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+            {item.label}
+          </p>
+          <div className="mt-2 space-y-1">
+            {item.values.map((value) => (
+              <p key={value} className="text-base leading-relaxed" style={{ color: themeColor }}>
+                {value}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+            {item.secondaryLabel}
+          </p>
+          <div className="mt-2 space-y-1">
+            {item.secondaryValues?.map((value) => (
+              <p key={value} className="text-base leading-relaxed" style={{ color: themeColor }}>
+                {value}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (item.layout === "double-center") {
+    return (
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+            {item.label}
+          </p>
+          <p className="mt-2 text-base leading-relaxed" style={{ color: themeColor }}>
+            {item.values[0]}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+            {item.secondaryLabel}
+          </p>
+          <p className="mt-2 text-base leading-relaxed" style={{ color: themeColor }}>
+            {item.secondaryValues?.[0]}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+          {item.label}
+        </p>
+        <div className="mt-2 space-y-1">
+          {item.values.map((value) => (
+            <p key={value} className="text-sm leading-relaxed" style={{ color: themeColor }}>
+              {value}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+          {item.secondaryLabel}
+        </p>
+        <div className="mt-2 space-y-1">
+          {item.secondaryValues?.map((value) => (
+            <p key={value} className="text-sm leading-relaxed" style={{ color: themeColor }}>
+              {value}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function WeddingDetailsTabs() {
   const [activeTab, setActiveTab] = useState<WeddingDetailTabKey>("Venue");
@@ -100,16 +228,30 @@ function WeddingDetailsTabs() {
         </p>
 
         <div className="mt-6 space-y-3">
-          {activeContent.items.map((item) => (
-            <div key={item.label} className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
-                {item.label}
-              </p>
-              <p className="mt-1 text-base leading-relaxed" style={{ color: themeColor }}>
-                {item.value}
-              </p>
-            </div>
-          ))}
+          {activeTab === "Entourage"
+            ? entourageItems.map((item) => <div key={item.label}>{renderEntourageCard(item)}</div>)
+            : activeContent.items.map((item) => {
+                const [time, ...rest] = item.value.split("—");
+                const subtitle = rest.join("—").trim();
+
+                return (
+                  <div key={item.label} className="rounded-2xl border border-[#521322]/10 bg-[#FFF1E1]/70 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+                      {item.label}
+                    </p>
+                    <div className="mt-2">
+                      <p className="text-base font-semibold leading-relaxed" style={{ color: themeColor }}>
+                        {time.trim()}
+                      </p>
+                      {subtitle ? (
+                        <p className="mt-1 text-sm leading-relaxed" style={{ color: themeColor }}>
+                          {subtitle}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
         </div>
       </div>
     </div>
@@ -309,7 +451,7 @@ export default function Home() {
         }}
       >
         <a href="#home" className="tracking-wide transition-colors" style={navLinkStyle}>
-          Our Story
+          Top
         </a>
         <a
           href="#countdown"
@@ -351,10 +493,10 @@ export default function Home() {
           
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}></div>
           <div className="hero-text absolute z-10 w-1/2" style={{ color: themeColor, opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(0.5rem, 12vw, 14rem)" }}>
-            <h1 className="text-right" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
+            <h1 className="text-right" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", lineHeight: "1", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
               Luc & Gail
             </h1>
-            <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
+            <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, lineHeight: "1", marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
               are getting married!
               {/* Under Jehovah's blessing, they begin their life as one. */}
             </p>
@@ -369,11 +511,11 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
             How We Met
           </h2>
-          <p className="text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
+          {/* <p className="text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
             It was a beautiful day when our paths crossed. From that moment on,
             we knew our story was just beginning. Every laugh, every adventure,
             and every quiet moment has been a gift.
-          </p>
+          </p> */}
         </div>
       </section>
 
@@ -422,7 +564,7 @@ export default function Home() {
       {/* Dress Code Section */}
       <section id="dress" className="min-h-screen w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: "#A78A9C" }}>
         <div className="w-full max-w-4xl rounded-[2rem] border border-white/40 bg-white/60 px-6 py-10 text-center shadow-lg backdrop-blur-sm sm:px-10 md:px-14 md:py-14">
-          <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.35em]" style={{ color: "#000000" }}>
+          <p className="mb-4 text-l font-extrabold uppercase tracking-[0.35em]" style={{ color: "#000000" }}>
             DRESS CODE
           </p>
           <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed" style={{ color: "#000000" }}>
