@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -252,6 +253,29 @@ function WeddingDetailsTabs() {
                   </div>
                 );
               })}
+
+          {activeTab === "Venue" ? (
+            <div className="mt-4 overflow-hidden rounded-[1.25rem] border border-[#521322]/10 bg-white/70">
+              <div className="p-4 text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+                  Map
+                </p>
+                <p className="mt-2 text-base font-semibold" style={{ color: themeColor }}>
+                  Tree House Mansion
+                </p>
+                <p className="mt-1 text-sm leading-relaxed" style={{ color: themeColor }}>
+                  5X44+7X5 Lalaan 2, Leynes St, Lalaan 2, Silang, 4118 Cavite
+                </p>
+              </div>
+              <iframe
+                title="Tree House Mansion Location"
+                src="https://www.google.com/maps?q=Tree%20House%20Mansion%205X44%2B7X5%20Lalaan%202%20Leynes%20St%20Lalaan%202%20Silang%204118%20Cavite&output=embed"
+                className="h-64 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -450,7 +474,7 @@ export default function Home() {
     <div ref={containerRef} className="min-h-screen flex flex-col" style={{ backgroundColor: ivoryColor }}>
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-start gap-3 sm:gap-5 md:gap-8 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-start gap-6 sm:gap-6 md:gap-6 transition-all duration-300"
         style={{
           backgroundColor: scrollY > NAV_SCROLL_THRESHOLD ? "white" : "transparent",
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
@@ -512,16 +536,63 @@ export default function Home() {
       </section>
 
       {/* Story Section 2 */}
-      <section id="story" className="min-h-screen w-full flex items-center justify-center px-6" style={{ backgroundColor: ivoryColor }}>
-        <div className="max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
-            How We Met
-          </h2>
-          {/* <p className="text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
-            It was a beautiful day when our paths crossed. From that moment on,
-            we knew our story was just beginning. Every laugh, every adventure,
-            and every quiet moment has been a gift.
-          </p> */}
+      <section
+        id="story"
+        className="flex min-h-[100svh] w-full items-center justify-center px-4 py-6 sm:px-6 lg:px-8"
+        style={{ backgroundColor: ivoryColor }}
+      >
+        <div className="mx-auto flex w-full max-w-8xl flex-1 flex-col gap-4 lg:flex-row lg:items-stretch">
+          <div className="flex-1 overflow-hidden rounded-[2rem] bg-white/70 shadow-sm">
+            <Image
+              src="/images/story3.jpg"
+              alt="Story photo 3"
+              width={1200}
+              height={1600}
+              className="h-full w-full object-cover"
+            />
+          </div>
+
+          <div className="flex flex-1 flex-col gap-4">
+            <div className="grid flex-1 gap-4 sm:grid-cols-2">
+              <div className="overflow-hidden rounded-[1.5rem] bg-white/70 shadow-sm sm:col-span-2">
+                <Image
+                  src="/images/story2.jpg"
+                  alt="Story photo 2"
+                  width={1600}
+                  height={900}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="overflow-hidden rounded-[1.5rem] bg-white/70 shadow-sm">
+                <Image
+                  src="/images/story1.jpg"
+                  alt="Story photo 1"
+                  width={900}
+                  height={1200}
+                  className="h-56 w-full object-cover sm:h-72"
+                />
+              </div>
+              <div className="overflow-hidden rounded-[1.5rem] bg-white/70 shadow-sm">
+                <Image
+                  src="/images/story4.jpg"
+                  alt="Story photo 4"
+                  width={900}
+                  height={1200}
+                  className="h-56 w-full object-cover sm:h-72"
+                />
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-[1.5rem] bg-white/70 shadow-sm">
+              <Image
+                src="/images/story5.jpg"
+                alt="Story photo 5"
+                width={1600}
+                height={900}
+                className="h-56 w-full object-cover sm:h-72"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -589,13 +660,13 @@ export default function Home() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: "#000000" }}>
               Dress Code Colors
             </p>
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-start">
               {[
                 { color: "#E4BEB4", name: "Rose Pink" },
                 { color: "#DA979B", name: "Dusty Rose" },
                 { color: "#9C5C62", name: "Muted Burgundy" },
               ].map((swatch) => (
-                <div key={swatch.color} className="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-white/80 px-4 py-4 shadow-sm">
+                <div key={swatch.color} className="flex flex-1 items-center justify-start gap-3 rounded-2xl bg-white/80 px-4 py-4 shadow-sm">
                   <div className="h-10 w-10" style={{ backgroundColor: swatch.color }} />
                   <div className="text-left">
                     <p className="text-sm font-semibold uppercase tracking-[0.2em]" style={{ color: "#000000" }}>
