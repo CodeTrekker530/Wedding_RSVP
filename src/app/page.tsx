@@ -786,7 +786,7 @@ export default function Home() {
                       Will this person attend?
                     </legend>
                     <div className="grid grid-cols-2 gap-3">
-                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "yes" ? "border-black bg-black text-white" : "border-gray-200"}`} style={{ color: guest.attending === "yes" ? "white" : themeColor }}>
+                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "yes" ? "text-white" : "border-gray-200"}`} style={{ borderColor: guest.attending === "yes" ? themeColor : undefined, backgroundColor: guest.attending === "yes" ? themeColor : undefined, color: guest.attending === "yes" ? "white" : themeColor }}>
                         <input
                           type="radio"
                           name={`${guest.id}-attending`}
@@ -797,7 +797,7 @@ export default function Home() {
                         />
                         Yes, I will attend
                       </label>
-                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "border-black bg-black text-white" : "border-gray-200"}`} style={{ color: guest.attending === "no" ? "white" : themeColor }}>
+                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "text-white" : "border-gray-200"}`} style={{ borderColor: guest.attending === "no" ? themeColor : undefined, backgroundColor: guest.attending === "no" ? themeColor : undefined, color: guest.attending === "no" ? "white" : themeColor }}>
                         <input
                           type="radio"
                           name={`${guest.id}-attending`}
@@ -858,7 +858,7 @@ export default function Home() {
               type="submit"
               disabled={isSubmittingRsvp}
               className="w-full rounded-full px-6 py-3 text-white font-semibold tracking-wide transition-colors disabled:cursor-not-allowed disabled:bg-gray-400"
-              style={{ backgroundColor: "black" }}
+              style={{ backgroundColor: themeColor }}
             >
               {isSubmittingRsvp ? "Sending..." : "Send RSVP"}
             </button>
