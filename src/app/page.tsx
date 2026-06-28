@@ -463,8 +463,38 @@ export default function Home() {
 
     if (!target) return;
 
-    const navOffset = 96;
+    const navOffset = 380;
     const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: "smooth",
+    });
+  }
+
+    function scrollToSection2(targetId: string) {
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    const navOffset = -100;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
+
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: "smooth",
+    });
+  }
+
+      function scrollToSection3(targetId: string) {
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    const navOffset = -320;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
+
 
     window.scrollTo({
       top: Math.max(0, targetTop),
@@ -501,11 +531,24 @@ export default function Home() {
           >
             Wedding Details
           </a>
-          <a href="#dress" className="tracking-wide transition-colors" style={navLinkStyle}>
+          <a
+            href="#dress"
+            className="tracking-wide transition-colors"
+            style={navLinkStyle}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToSection2("dress");
+            }}
+          >
             Dress Code
           </a>
         </div>
-        <a href="#rsvp" className="tracking-wide transition-colors hidden md:inline-block" style={rsvpLinkStyle}>
+        <a href="#rsvp" className="tracking-wide transition-colors hidden md:inline-block" style={rsvpLinkStyle}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToSection3("rsvp");
+            }}
+            >
           RSVP
         </a>
       </nav>
@@ -793,8 +836,8 @@ export default function Home() {
                     <legend className="block text-sm font-semibold tracking-wide mb-2" style={{ color: themeColor }}>
                       Will this person attend?
                     </legend>
-                    <div className="grid grid-cols-2 gap-3">
-                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "yes" ? "text-white" : "border-gray-200"}`} style={{ borderColor: guest.attending === "yes" ? themeColor : undefined, backgroundColor: guest.attending === "yes" ? themeColor : undefined, color: guest.attending === "yes" ? "white" : themeColor }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <label className={`w-full cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "yes" ? "text-white" : "border-gray-200"}`} style={{ borderColor: guest.attending === "yes" ? themeColor : undefined, backgroundColor: guest.attending === "yes" ? themeColor : undefined, color: guest.attending === "yes" ? "white" : themeColor }}>
                         <input
                           type="radio"
                           name={`${guest.id}-attending`}
@@ -805,7 +848,7 @@ export default function Home() {
                         />
                         Yes, I will attend
                       </label>
-                      <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "text-white" : "border-gray-200"}`} style={{ borderColor: guest.attending === "no" ? themeColor : undefined, backgroundColor: guest.attending === "no" ? themeColor : undefined, color: guest.attending === "no" ? "white" : themeColor }}>
+                      <label className={`w-full cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "text-white" : "border-gray-200"}`} style={{ borderColor: guest.attending === "no" ? themeColor : undefined, backgroundColor: guest.attending === "no" ? themeColor : undefined, color: guest.attending === "no" ? "white" : themeColor }}>
                         <input
                           type="radio"
                           name={`${guest.id}-attending`}
