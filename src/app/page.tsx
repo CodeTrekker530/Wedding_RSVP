@@ -795,7 +795,7 @@ export default function Home() {
                           onChange={(event) => updateRsvpGuest(guest.id, "attending", event.target.value)}
                           className="sr-only"
                         />
-                        Yes
+                        Yes, I will attend
                       </label>
                       <label className={`cursor-pointer rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors ${guest.attending === "no" ? "border-black bg-black text-white" : "border-gray-200"}`} style={{ color: guest.attending === "no" ? "white" : themeColor }}>
                         <input
@@ -806,7 +806,7 @@ export default function Home() {
                           onChange={(event) => updateRsvpGuest(guest.id, "attending", event.target.value)}
                           className="sr-only"
                         />
-                        No
+                        No, I will join through Zoom instead
                       </label>
                     </div>
                   </fieldset>

@@ -26,7 +26,7 @@ const italianno = Italianno({
 });
 
 export const metadata: Metadata = {
-  title: "Our Wedding",
+  title: "Luc and Gail's Wedding",
   description: "Join us as we celebrate our love and create memories together",
 };
 
