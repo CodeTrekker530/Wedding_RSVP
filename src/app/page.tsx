@@ -311,8 +311,14 @@ export default function Home() {
     color: themeColor,
   };
   const rsvpLinkStyle = {
-    ...navLinkStyle,
-    color: "#deaa00",
+    fontSize: navLinkStyle.fontSize,
+    fontWeight: navLinkStyle.fontWeight,
+    lineHeight: navLinkStyle.lineHeight,
+    color: "white",
+    backgroundColor: themeColor,
+    padding: "0.5rem 1rem",
+    borderRadius: "0.5rem",
+    display: "inline-block",
   };
 
   useEffect(() => {
@@ -474,30 +480,32 @@ export default function Home() {
     <div ref={containerRef} className="min-h-screen flex flex-col" style={{ backgroundColor: ivoryColor }}>
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-start gap-6 sm:gap-6 md:gap-6 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-between items-center gap-6 sm:gap-6 md:gap-6 transition-all duration-300"
         style={{
           backgroundColor: scrollY > NAV_SCROLL_THRESHOLD ? "white" : "transparent",
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        <a href="#home" className="tracking-wide transition-colors" style={navLinkStyle}>
-          Top
-        </a>
-        <a
-          href="#countdown"
-          className="tracking-wide transition-colors"
-          style={navLinkStyle}
-          onClick={(event) => {
-            event.preventDefault();
-            scrollToSection("countdown");
-          }}
-        >
-          Wedding Details
-        </a>
-        <a href="#dress" className="tracking-wide transition-colors" style={navLinkStyle}>
-          Dress Code
-        </a>
-        <a href="#rsvp" className="tracking-wide transition-colors" style={rsvpLinkStyle}>
+        <div className="flex justify-center md:justify-start gap-6 sm:gap-6 md:gap-6">
+          <a href="#home" className="tracking-wide transition-colors" style={navLinkStyle}>
+            Top
+          </a>
+          <a
+            href="#countdown"
+            className="tracking-wide transition-colors"
+            style={navLinkStyle}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToSection("countdown");
+            }}
+          >
+            Wedding Details
+          </a>
+          <a href="#dress" className="tracking-wide transition-colors" style={navLinkStyle}>
+            Dress Code
+          </a>
+        </div>
+        <a href="#rsvp" className="tracking-wide transition-colors hidden md:inline-block" style={rsvpLinkStyle}>
           RSVP
         </a>
       </nav>
