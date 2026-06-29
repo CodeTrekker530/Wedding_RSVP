@@ -463,38 +463,14 @@ export default function Home() {
 
     if (!target) return;
 
-    const navOffset = 380;
-    const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
+    // Determine nav height dynamically so the scroll offset is correct across devices
+    const navEl = document.querySelector("nav") as HTMLElement | null;
+    const navHeight = navEl ? navEl.offsetHeight : 0;
+    const extraOffset = 20; // extra space so content isn't flush with the nav
 
-    window.scrollTo({
-      top: Math.max(0, targetTop),
-      behavior: "smooth",
-    });
-  }
+    const offset = navHeight + extraOffset;
 
-    function scrollToSection2(targetId: string) {
-    const target = document.getElementById(targetId);
-
-    if (!target) return;
-
-    const navOffset = -100;
-    const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
-
-
-    window.scrollTo({
-      top: Math.max(0, targetTop),
-      behavior: "smooth",
-    });
-  }
-
-      function scrollToSection3(targetId: string) {
-    const target = document.getElementById(targetId);
-
-    if (!target) return;
-
-    const navOffset = -320;
-    const targetTop = target.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2 + target.offsetHeight / 2 + navOffset / 2;
-
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - offset;
 
     window.scrollTo({
       top: Math.max(0, targetTop),
@@ -537,7 +513,7 @@ export default function Home() {
             style={navLinkStyle}
             onClick={(event) => {
               event.preventDefault();
-              scrollToSection2("dress");
+              scrollToSection("dress");
             }}
           >
             Dress Code
@@ -546,7 +522,7 @@ export default function Home() {
         <a href="#rsvp" className="tracking-wide transition-colors hidden md:inline-block" style={rsvpLinkStyle}
             onClick={(event) => {
               event.preventDefault();
-              scrollToSection3("rsvp");
+              scrollToSection("rsvp");
             }}
             >
           RSVP
