@@ -683,7 +683,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-10 rounded-[1.5rem] border border-white/40 bg-white/40 p-6 sm:p-8">
+          <div className="mt-10 rounded-[1.5rem] border border-white/40 p-6 sm:p-8" style={{ backgroundColor: "#ffffff7a" }}>
             <p className="text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: "#000000" }}>
               Dress Code Colors
             </p>
@@ -691,15 +691,12 @@ export default function Home() {
               {[
                 { color: "#E4BEB4", name: "Rose Pink" },
                 { color: "#DA979B", name: "Dusty Rose" },
-                { color: "#9C5C62", name: "Muted Burgundy" },
+                { color: "#926063", name: "Muted Mauve" },
               ].map((swatch) => (
                 <div key={swatch.color} className="flex flex-1 items-center justify-start gap-3 rounded-2xl bg-white/80 px-4 py-4 shadow-sm">
-                  <div className="h-10 w-10" style={{ backgroundColor: swatch.color }} />
+                  <div className="h-10 w-10 rounded-full" style={{ backgroundColor: swatch.color }} />
                   <div className="text-left">
                     <p className="text-sm font-semibold uppercase tracking-[0.2em]" style={{ color: "#000000" }}>
-                      {swatch.color}
-                    </p>
-                    <p className="text-sm" style={{ color: "#000000" }}>
                       {swatch.name}
                     </p>
                   </div>
