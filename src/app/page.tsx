@@ -719,7 +719,7 @@ export default function Home() {
       </section>
 
       {/* Important Reminders Section */}
-      <section id="faq" className="w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: ivoryColor }}>
+      <section id="faq" className="w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: ivoryColor }} >
         <div className="w-full max-w-5xl rounded-[2rem] border border-[#521322]/10 bg-white/80 px-6 py-10 shadow-lg backdrop-blur-sm sm:px-10 md:px-14 md:py-14">
           <div className="text-center">
             <p className="mb-4 text-l font-semibold uppercase tracking-[0.35em]" style={{ color: themeColor }}>
@@ -814,18 +814,18 @@ export default function Home() {
       ) : null}
 
       {/* RSVP Section */}
-      <section id="rsvp" className="min-h-screen w-full flex items-center justify-center px-6 py-24" style={{ backgroundColor: ivoryColor }}>
+      <section id="rsvp" className="min-h-screen w-full flex items-center justify-center px-6 py-24"  style={{ backgroundColor: "#A78A9C" }}>
         <div className="w-full max-w-2xl">
-          <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide" style={{ color: themeColor }}>
-              RSVP
-            </h2>
-            <p className="text-lg md:text-xl font-light leading-relaxed" style={{ color: themeColor }}>
-              We would love to know if you can celebrate with us.
-            </p>
-          </div>
-
           <form onSubmit={handleRsvpSubmit} className="bg-white shadow-lg rounded-3xl p-6 md:p-8 space-y-6">
+            <div className="text-center mb-10">
+            <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.35em]" style={{ color: themeColor }}>
+              RSVP
+            </p>
+              <p className="text-lg md:text-l font-light leading-relaxed" style={{ color: themeColor }}>
+                We would love to know if you can celebrate with us.
+              </p>
+            </div>
+
             <div className="space-y-4">
               {rsvpGuests.map((guest, index) => (
                 <div key={guest.id} className="rounded-2xl border border-gray-200 p-4 space-y-4">
@@ -987,7 +987,7 @@ export default function Home() {
             <p className="mx-auto max-w-2xl text-lg md:text-xl font-light leading-relaxed" style={{ color: themeColor }}>
               Your presence at our celebration is the gift we truly treasure. Should you wish to give, cash gifts will help us as we begin the new life we have been preparing for together.
             </p>
-            <p className="mt-6 text-base font-medium tracking-[0.25em] text-gray-500">
+            <p className="mt-6 text-base font-medium tracking-[0.25em]" style={{ color: themeColor }}>
               Should you wish to share a gift, you may do so through the following bank accounts.
             </p>
           </div>
