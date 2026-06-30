@@ -486,7 +486,7 @@ export default function Home() {
     <div ref={containerRef} className="min-h-screen flex flex-col" style={{ backgroundColor: ivoryColor }}>
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-5 md:py-6 flex justify-center md:justify-between items-center gap-6 sm:gap-6 md:gap-6 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-3 md:py-4 flex justify-center md:justify-between items-center gap-6 sm:gap-6 md:gap-6 transition-all duration-300"
         style={{
           backgroundColor: scrollY > NAV_SCROLL_THRESHOLD ? "white" : "transparent",
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
