@@ -518,6 +518,17 @@ export default function Home() {
           >
             Dress Code
           </a>
+          <a
+            href="#faq"
+            className="tracking-wide transition-colors"
+            style={navLinkStyle}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToSection("faq");
+            }}
+          >
+            Reminders
+          </a>
         </div>
         <a href="#rsvp" className="tracking-wide transition-colors hidden md:inline-block" style={rsvpLinkStyle}
             onClick={(event) => {
@@ -703,6 +714,67 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Important Reminders Section */}
+      <section id="faq" className="w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: ivoryColor }}>
+        <div className="w-full max-w-5xl rounded-[2rem] border border-[#521322]/10 bg-white/80 px-6 py-10 shadow-lg backdrop-blur-sm sm:px-10 md:px-14 md:py-14">
+          <div className="text-center">
+            <p className="mb-4 text-l font-semibold uppercase tracking-[0.35em]" style={{ color: themeColor }}>
+              WEDDING REMINDERS
+            </p>
+            <h2 className="text-1xl md:text-2xl font-light tracking-wide" style={{ color: themeColor }}>
+              Please Read Before the Ceremony
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed" style={{ color: themeColor }}>
+              A few important notes to help make the day meaningful, respectful, and enjoyable for everyone.
+            </p>
+          </div>
+
+          <div className="mt-10 space-y-6">
+            {[
+              {
+                question: "What time should I arrive?",
+                answer:
+                  "Please arrive at least one hour before the ceremony. To maintain the reverence of the occasion, guests arriving after the ceremony begins will be asked to wait until after the opening prayer before entering the hall.",
+              },
+              {
+                question: "Can I bring a plus one?",
+                answer:
+                  "Due to limited seating, we can only accommodate guests named on the invitation. If you have a plus one, it will be indicated on your invitation. Thank you for understanding.",
+              },
+              {
+                question: "Can I take photos during the ceremony?",
+                answer:
+                  "We kindly request an unplugged ceremony. Please refrain from taking photos or videos during the wedding procession and ceremony, especially near the aisle, and allow our professional photographers to capture these precious moments. Thank you for helping us keep the ceremony reverent and distraction-free.",
+              },
+              {
+                question: "Are children welcome?",
+                answer:
+                  "Our wedding is an adults-only celebration, except for immediate family members who are part of the wedding.",
+              },
+              {
+                question: "What if I can't attend?",
+                answer:
+                  "If you're unable to attend in person, please let us know as soon as possible. We'll be sharing a Zoom link so you can still celebrate with us from wherever you are.",
+              },
+              {
+                question: "Will rice or confetti be thrown?",
+                answer:
+                  "No. As one of Jehovah's Witnesses, we do not include traditions such as throwing rice or confetti.",
+              },
+            ].map((item) => (
+              <div key={item.question} className="rounded-[1.5rem] border border-[#521322]/10 bg-[#FFF1E1]/60 p-6 text-left shadow-sm">
+                <p className="text-xl font-semibold" style={{ color: themeColor }}>
+                  {item.question}
+                </p>
+                <p className="mt-3 text-base leading-relaxed" style={{ color: themeColor }}>
+                  {item.answer}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
