@@ -493,9 +493,6 @@ export default function Home() {
         }}
       >
         <div className="flex justify-center md:justify-start gap-6 sm:gap-6 md:gap-6">
-          <a href="#home" className="tracking-wide transition-colors" style={navLinkStyle}>
-            Top
-          </a>
           <a
             href="#countdown"
             className="tracking-wide transition-colors"
@@ -539,6 +536,29 @@ export default function Home() {
           RSVP
         </a>
       </nav>
+
+      {scrollY > 20 ? (
+        <button
+          type="button"
+          onClick={() => scrollToSection("home")}
+          aria-label="Scroll to top"
+          className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/95 shadow-xl transition-transform duration-200 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#521322]/50"
+          style={{ color: themeColor }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      ) : null}
 
       {/* Hero Section with Buttons */}
       <section
