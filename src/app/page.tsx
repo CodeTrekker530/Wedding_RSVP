@@ -662,8 +662,8 @@ export default function Home() {
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: themeColor }}>
               Countdown to the big day
             </p>
-            <div className="overflow-hidden rounded-[2rem] border border-[#521322]/15 bg-gray-50 px-3 py-3 shadow-sm">
-              <div className="inline-flex min-w-full flex-nowrap items-center justify-center gap-3 whitespace-nowrap text-center text-[0.78rem] sm:gap-4 sm:text-[0.85rem]">
+            <div className="overflow-x-auto rounded-[2rem] border border-[#521322]/15 bg-gray-50 px-3 py-3 shadow-sm">
+              <div className="inline-flex min-w-max flex-nowrap items-center justify-center gap-3 whitespace-nowrap text-center text-[0.78rem] sm:gap-4 sm:text-[0.85rem]">
                 <div className="flex min-w-[4rem] flex-col items-center justify-center">
                   <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownDays}</p>
                   <span className="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#4b2d3d]">Days</span>
