@@ -487,16 +487,16 @@ export default function Home() {
     <div ref={containerRef} className="min-h-screen flex flex-col" style={{ backgroundColor: ivoryColor }}>
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-3 md:py-4 flex justify-center md:justify-between items-center gap-6 sm:gap-6 md:gap-6 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-3 md:py-4 flex flex-nowrap justify-center md:justify-between items-center gap-2 sm:gap-4 md:gap-6 transition-all duration-300 overflow-x-auto"
         style={{
           backgroundColor: scrollY > NAV_SCROLL_THRESHOLD ? "white" : "transparent",
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        <div className="flex justify-center md:justify-start gap-6 sm:gap-6 md:gap-6">
+        <div className="flex flex-nowrap justify-center md:justify-start gap-2 sm:gap-4 md:gap-6">
           <a
             href="#countdown"
-            className="tracking-wide transition-colors"
+            className="tracking-wide whitespace-nowrap transition-colors"
             style={navLinkStyle}
             onClick={(event) => {
               event.preventDefault();
@@ -507,7 +507,7 @@ export default function Home() {
           </a>
           <a
             href="#dress"
-            className="tracking-wide transition-colors"
+            className="tracking-wide whitespace-nowrap transition-colors"
             style={navLinkStyle}
             onClick={(event) => {
               event.preventDefault();
@@ -518,7 +518,7 @@ export default function Home() {
           </a>
           <a
             href="#faq"
-            className="tracking-wide transition-colors"
+            className="tracking-wide whitespace-nowrap transition-colors"
             style={navLinkStyle}
             onClick={(event) => {
               event.preventDefault();
@@ -886,7 +886,7 @@ export default function Home() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="flex-1 text-left">
+                <div className="flex-1 min-h-20 flex flex-col justify-center text-left">
                   <p className="text-sm font-semibold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
                     {account.label}
                   </p>
