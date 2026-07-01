@@ -32,8 +32,15 @@ const italianno = Italianno({
 });
 
 export const metadata: Metadata = {
-  title: "Luc and Gail's Wedding",
+  title: "RSVP",
   description: "Join us as we celebrate our love and create memories together",
+  openGraph: {
+    images: [],
+  },
+  twitter: {
+    card: "summary",
+    images: [],
+  },
 };
 
 export default function RootLayout({
