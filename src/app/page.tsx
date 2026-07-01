@@ -687,9 +687,9 @@ export default function Home() {
       {/* Wedding Details Section */}
       <section id="details" className="w-full flex items-center justify-center px-6 py-16" style={{ backgroundColor: ivoryColor }}>
         <div className="w-full max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-wide" style={{ color: themeColor }}>
-            Wedding Details
-          </h2>
+          <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.35em]" style={{ color: "#000000" }}>
+            WEDDING DETAILS
+          </p>
           <p className="mx-auto max-w-2xl text-lg md:text-xl font-light leading-relaxed mb-8" style={{ color: themeColor }}>
             Explore the venue, program, and our entourage through the tabs below.
           </p>
@@ -700,7 +700,7 @@ export default function Home() {
       {/* Dress Code Section */}
       <section id="dress" className="min-h-screen w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: "#A78A9C" }}>
         <div className="w-full max-w-4xl rounded-[2rem] border border-white/40 bg-white/60 px-6 py-10 text-center shadow-lg backdrop-blur-sm sm:px-10 md:px-14 md:py-14">
-          <p className="mb-4 text-l font-extrabold uppercase tracking-[0.35em]" style={{ color: "#000000" }}>
+          <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.35em]" style={{ color: "#000000" }}>
             DRESS CODE
           </p>
           <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed" style={{ color: "#000000" }}>
@@ -715,8 +715,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-10 rounded-[1.5rem] border border-white/40 p-6 sm:p-8" style={{ backgroundColor: "#ffffff7a" }}>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: "#000000" }}>
+          <div className="mt-10 p-6 sm:p-8">
+            <p className="text-sm font-bold uppercase tracking-[0.3em]" style={{ color: "#000000" }}>
               Dress Code Colors
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-start">
@@ -743,7 +743,7 @@ export default function Home() {
       <section id="faq" className="w-full flex items-center justify-center px-6 py-20" style={{ backgroundColor: ivoryColor }} >
         <div className="w-full max-w-5xl rounded-[2rem] border border-[#521322]/10 bg-white/80 px-6 py-10 shadow-lg backdrop-blur-sm sm:px-10 md:px-14 md:py-14">
           <div className="text-center">
-            <p className="mb-4 text-l font-semibold uppercase tracking-[0.35em]" style={{ color: themeColor }}>
+            <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.35em]" style={{ color: themeColor }}>
               WEDDING REMINDERS
             </p>
             <h2 className="text-1xl md:text-2xl font-light tracking-wide" style={{ color: themeColor }}>
@@ -838,8 +838,8 @@ export default function Home() {
       <section id="gifts" className="w-full flex items-center justify-center px-6 py-24" style={{ backgroundColor: "#FFF1E1" }}>
         <div className="w-full max-w-4xl">
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide" style={{ color: themeColor }}>
-              A note on Gifts
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4 tracking-wide" style={{ color: themeColor }}>
+              A note on <span style={{ fontFamily: "var(--font-italianno)", fontSize: "2em", fontWeight: 700 }}>Gifts</span>
             </h2>
             <p className="mx-auto max-w-2xl text-lg md:text-xl font-light leading-relaxed" style={{ color: themeColor }}>
               Your presence at our celebration is the gift we truly treasure. Should you wish to give, cash gifts will help us as we begin the new life we have been preparing for together.
