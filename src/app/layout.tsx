@@ -34,6 +34,17 @@ const italianno = Italianno({
 export const metadata: Metadata = {
   title: "RSVP",
   description: "Join us as we celebrate our love and create memories together",
+  openGraph: {
+    title: "RSVP",
+    description: "Join us as we celebrate our love and create memories together",
+    images: [],
+  },
+  twitter: {
+    card: "summary",
+    title: "RSVP",
+    description: "Join us as we celebrate our love and create memories together",
+    images: [],
+  },
 };
 
 export default function RootLayout({
