@@ -662,24 +662,24 @@ export default function Home() {
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: themeColor }}>
               Countdown to the big day
             </p>
-            <div className="overflow-hidden rounded-[2rem] border border-[#521322]/15 bg-gray-50 px-2 py-2 shadow-sm">
-              <div className="grid min-w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1 text-center text-[0.72rem] sm:gap-2 sm:text-[0.78rem]">
-                <div className="min-w-0 flex flex-col items-center justify-center px-1">
+            <div className="overflow-hidden rounded-[2rem] border border-[#521322]/15 bg-gray-50 px-3 py-3 shadow-sm">
+              <div className="grid min-w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 text-center text-[0.72rem] sm:gap-3 sm:text-[0.78rem]">
+                <div className="min-w-0 flex flex-col items-center justify-center px-1.5">
                   <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownDays}</p>
                   <span className="mt-1 text-[0.65rem] uppercase tracking-[0.22em] text-[#4b2d3d]">Days</span>
                 </div>
                 <span className="text-2xl font-semibold text-[#4b2d3d] sm:text-3xl">:</span>
-                <div className="min-w-0 flex flex-col items-center justify-center px-1">
+                <div className="min-w-0 flex flex-col items-center justify-center px-1.5">
                   <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownHours}</p>
                   <span className="mt-1 text-[0.65rem] uppercase tracking-[0.22em] text-[#4b2d3d]">Hours</span>
                 </div>
                 <span className="text-2xl font-semibold text-[#4b2d3d] sm:text-3xl">:</span>
-                <div className="min-w-0 flex flex-col items-center justify-center px-1">
+                <div className="min-w-0 flex flex-col items-center justify-center px-1.5">
                   <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownMinutes}</p>
                   <span className="mt-1 text-[0.65rem] uppercase tracking-[0.22em] text-[#4b2d3d]">Minutes</span>
                 </div>
                 <span className="text-2xl font-semibold text-[#4b2d3d] sm:text-3xl">:</span>
-                <div className="min-w-0 flex flex-col items-center justify-center px-1">
+                <div className="min-w-0 flex flex-col items-center justify-center px-1.5">
                   <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownSeconds}</p>
                   <span className="mt-1 text-[0.65rem] uppercase tracking-[0.22em] text-[#4b2d3d]">Seconds</span>
                 </div>
