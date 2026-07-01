@@ -487,13 +487,13 @@ export default function Home() {
     <div ref={containerRef} className="min-h-screen flex flex-col" style={{ backgroundColor: ivoryColor }}>
       {/* Fixed Navigation Bar - appears on scroll */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-3 md:py-4 flex flex-nowrap justify-center md:justify-between items-center gap-2 sm:gap-4 md:gap-6 transition-all duration-300 overflow-x-auto"
+        className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-3 md:py-4 flex flex-nowrap justify-center md:justify-between items-center gap-4 sm:gap-5 md:gap-6 transition-all duration-300 overflow-x-auto"
         style={{
           backgroundColor: scrollY > NAV_SCROLL_THRESHOLD ? "white" : "transparent",
           boxShadow: scrollY > NAV_SCROLL_THRESHOLD ? "0 2px 8px rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        <div className="flex flex-nowrap justify-center md:justify-start gap-2 sm:gap-4 md:gap-6">
+        <div className="flex flex-nowrap justify-center md:justify-start gap-5 sm:gap-5 md:gap-6">
           <a
             href="#countdown"
             className="tracking-wide whitespace-nowrap transition-colors"
@@ -662,22 +662,27 @@ export default function Home() {
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em]" style={{ color: themeColor }}>
               Countdown to the big day
             </p>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownDays}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Days</div>
-              </div>
-              <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownHours}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Hours</div>
-              </div>
-              <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownMinutes}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Minutes</div>
-              </div>
-              <div className="rounded-2xl bg-gray-50 px-4 py-5">
-                <div className="text-4xl font-semibold" style={{ color: themeColor }}>{countdownSeconds}</div>
-                <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: themeColor }}>Seconds</div>
+            <div className="overflow-hidden rounded-[2rem] border border-[#521322]/15 bg-gray-50 px-3 py-3 shadow-sm">
+              <div className="inline-flex min-w-full flex-nowrap items-center justify-center gap-3 whitespace-nowrap text-center text-[0.78rem] sm:gap-4 sm:text-[0.85rem]">
+                <div className="flex min-w-[4rem] flex-col items-center justify-center">
+                  <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownDays}</p>
+                  <span className="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#4b2d3d]">Days</span>
+                </div>
+                <span className="text-2xl font-semibold text-[#4b2d3d] sm:text-3xl">:</span>
+                <div className="flex min-w-[4rem] flex-col items-center justify-center">
+                  <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownHours}</p>
+                  <span className="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#4b2d3d]">Hours</span>
+                </div>
+                <span className="text-2xl font-semibold text-[#4b2d3d] sm:text-3xl">:</span>
+                <div className="flex min-w-[4rem] flex-col items-center justify-center">
+                  <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownMinutes}</p>
+                  <span className="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#4b2d3d]">Minutes</span>
+                </div>
+                <span className="text-2xl font-semibold text-[#4b2d3d] sm:text-3xl">:</span>
+                <div className="flex min-w-[4rem] flex-col items-center justify-center">
+                  <p className="text-2xl font-semibold sm:text-3xl" style={{ color: themeColor }}>{countdownSeconds}</p>
+                  <span className="mt-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#4b2d3d]">Seconds</span>
+                </div>
               </div>
             </div>
           </div>
@@ -877,7 +882,7 @@ export default function Home() {
               },
             ].map((account) => (
               <div key={account.accountNumber} className="flex flex-col gap-4 rounded-[1.75rem] border border-[#521322]/15 bg-white/90 p-6 shadow-sm sm:flex-row sm:items-center">
-                <div className="flex h-20 w-20 flex-none items-center justify-center overflow-hidden rounded-3xl bg-[#FFF1E1]/80">
+                <div className="ml-3 sm:ml-0 flex h-28 w-28 sm:h-20 sm:w-20 flex-none items-center justify-center overflow-hidden rounded-xl bg-[#FFF1E1]/80">
                   <Image
                     src={account.image}
                     alt={`${account.label} logo`}
@@ -887,11 +892,11 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex-1 min-h-20 flex flex-col justify-center text-left">
-                  <p className="text-sm font-semibold uppercase tracking-[0.25em]" style={{ color: themeColor }}>
+                  <p className="text-l font-bold uppercase tracking-[0.10em] leading-none" style={{ color: themeColor, lineHeight: "0.5" }}>
                     {account.label}
                   </p>
                   <div className="mt-2 flex items-center gap-3">
-                    <p className="text-xl font-semibold" style={{ color: themeColor }}>
+                    <p className="text-l font-medium" style={{ color: themeColor }}>
                       {account.accountNumber}
                     </p>
                     <button
