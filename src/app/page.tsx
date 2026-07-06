@@ -62,7 +62,7 @@ const weddingDetailTabs: Array<{
     title: "The Venue",
     description: "We’ll gather in a warm and elegant setting for a day of celebration and joy.",
     items: [
-      { label: "Date", value: "September 25, 2025" },
+      { label: "Date", value: "September 25, 2026" },
       { label: "Time", value: "9:30 AM" },
       { label: "Location", value: "Leynes St., Brgy. Lalaan II, Silang, Cavite 4118, Philippines." },
       { label: "Venue", value: "Tree House Mansion" },
@@ -587,7 +587,10 @@ export default function Home() {
             </h1>
             <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, lineHeight: "1", marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
               are getting married!
-              {/* Under Jehovah's blessing, they begin their life as one. */}
+            </p>
+            <p className="mt-3 mr-1 text-right text-sm font-semibold uppercase tracking-[0.35em] sm:mr-2 sm:text-base" style={{ color: themeColor }}>
+              <span className="sm:hidden">09.25.26</span>
+              <span className="hidden sm:inline">September 25, 2026</span>
             </p>
           </div>
         </div>
