@@ -548,14 +548,14 @@ export default function Home() {
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}></div>
           
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}></div>
-          <div className="hero-text absolute z-10" style={{ width: "min(90vw, 42rem)", color: themeColor, right: "clamp(1rem, 6vw, 6rem)", top: "50%", transform: "translateY(-50%)" }}>
-            <h1 className="text-right" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", lineHeight: "1", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)", textShadow: "0 1px 10px rgba(255, 255, 240, 0.8)" }}>
-              [Partner One] & [Partner Two]
+          <div className="hero-text absolute z-10 w-[min(90vw,42rem)] text-center" style={{ color: themeColor, left: "50%", top: "clamp(5rem, 10vh, 7rem)", transform: "translateX(-50%)" }}>
+            <h1 className="text-center" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(2.75rem, 6vw, 3.75rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", lineHeight: "1", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)", textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }}>
+              [Keith] & [Alicia]
             </h1>
-            <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, lineHeight: "1", marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }} >
+            <p className="text-center" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.25rem, 6vw, 3.25rem)", fontWeight: 400, lineHeight: "1", textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }} >
               are getting married!
             </p>
-            <p className="mt-3 mr-1 text-right text-sm font-semibold uppercase tracking-[0.35em] sm:mr-2 sm:text-base" style={{ color: themeColor, textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }}>
+            <p className="mt-3 text-center text-sm font-semibold uppercase tracking-[0.35em] sm:text-base" style={{ color: themeColor, textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }}>
               <span className="sm:hidden">06.12.27*</span>
               <span className="hidden sm:inline">June 12, 2027 (sample date)</span>
             </p>
@@ -1052,6 +1052,11 @@ export default function Home() {
           </form>
         </div>
       </section>
+      <footer className="w-full px-4 py-5 text-center" style={{ backgroundColor: ivoryColor, color: themeColor }}>
+        <p className="text-xs leading-relaxed sm:text-sm">
+          the names and information are fictional, images used are stock images)
+        </p>
+      </footer>
     </div>
   );
 }
