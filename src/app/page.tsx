@@ -28,25 +28,29 @@ const ivoryColor = "#FFFFF0";
 const countdownSectionColor = "#FFF1E1";
 
 const entourageItems: EntourageItem[] = [
-  { layout: "single", label: "OFFICIATING MINISTER", values: ["Ferdinand Ramos Jr."] },
+  { layout: "single", label: "OFFICIANT", values: ["[Officiant Name]"] },
   {
     layout: "double",
     label: "PARENTS OF THE GROOM",
-    values: ["Joel M. Blanca", "Glenda T. Blanca"],
+    values: ["[Parent Name]", "[Parent Name]"],
     secondaryLabel: "PARENTS OF THE BRIDE",
-    secondaryValues: ["Gil Gino D. Briones", "Melanie Hope E. Briones"],
+    secondaryValues: ["[Parent Name]", "[Parent Name]"],
   },
-  { layout: "single", label: "WITNESSES", values: ["Melvin Recongco", "Cynthia D. Amador"]},
-  { layout: "single", label: "BEST MAN", values: ["Jonard Jake M. Monilla"] },
+  {
+    layout: "double",
+    label: "BEST MAN",
+    values: ["[Name]"],
+    secondaryLabel: "MAID OF HONOR",
+    secondaryValues: ["[Name]"],
+  },
   {
     layout: "double-six",
     label: "GROOMSMEN",
-    values: ["Jared Nouwin M. Egipto", "Julian Abraham P. Blanca", "Judge Ethan T. Blanca", "Sebastian T. Blanca", "Alvin N. Tunay", "Glenn Adreanne F. Ampongan"],
-    secondaryLabel: "BRIDESMAID",
-    secondaryValues: ["Morice Jann E. Briones", "Jeneena Gabrielle E. Briones", "Keren-Happuch T. Blanca", "Sinead Brooklyn T. Blanca", "Rosalie T. Duclayan", "Alexandrei Dela Cruz"],
+    values: ["[Name]", "[Name]", "[Name]", "[Name]", "[Name]", "[Name]"],
+    secondaryLabel: "BRIDESMAIDS",
+    secondaryValues: ["[Name]", "[Name]", "[Name]", "[Name]", "[Name]", "[Name]"],
   },
-  { layout: "single", label: "FLOWER GIRL", values: ["Anne Claire L. Briones"] },
-  { layout: "double-center", label: "RING BEARER", values: ["Aiden Caleb L. Briones"], secondaryLabel: "BIBLE BEARER", secondaryValues: ["Malco Heart B. Gamboa"] },
+  { layout: "double-center", label: "RING BEARER", values: ["[Name]"], secondaryLabel: "FLOWER GIRL", secondaryValues: ["[Name]"] },
 ];
 
 const weddingDetailTabs: Array<{
@@ -62,10 +66,10 @@ const weddingDetailTabs: Array<{
     title: "The Venue",
     description: "We’ll gather in a warm and elegant setting for a day of celebration and joy.",
     items: [
-      { label: "Date", value: "September 25, 2026" },
-      { label: "Time", value: "9:30 AM" },
-      { label: "Location", value: "Leynes St., Brgy. Lalaan II, Silang, Cavite 4118, Philippines." },
-      { label: "Venue", value: "Tree House Mansion" },
+      { label: "Date", value: "June 12, 2027 (sample date)" },
+      { label: "Time", value: "[Start Time]" },
+      { label: "Location", value: "[Street Address, City, Region]" },
+      { label: "Venue", value: "[Venue Name]" },
     ],
   },
   {
@@ -74,19 +78,19 @@ const weddingDetailTabs: Array<{
     title: "The Day's Events",
     description: "A simple and heartfelt celebration with meaningful moments throughout the day.",
     items: [
-      { label: "Start of Ceremony", value: "9:30 AM — Exchanging of vows and becoming one." },
-      { label: "Picture Taking Session", value: "10:30 AM — Capturing the joy of this special day" },
-      { label: "Gather and Mingle", value: "11:00 AM — Guests are invited to enjoy light refreshements while the couple completes their portrait session" },
-      { label: "Lunch", value: "12:00 NN — A luncheon will be served for all the guests" },
-      { label: "Reception Begins", value: "1:00 PM — Join us as we continue the celebration and create laasting memories together" },
+      { label: "Ceremony", value: "[Start Time] — [Add ceremony details]" },
+      { label: "Photos", value: "[Photo Time] — [Add photo session details]" },
+      { label: "Gather and Mingle", value: "[Time] — [Add guest gathering details]" },
+      { label: "Meal", value: "[Meal Time] — [Add meal details]" },
+      { label: "Reception", value: "[Reception Time] — [Add reception details]" },
 
     ],
   },
   {
     key: "Entourage",
     label: "Entourage",
-    title: "Our Entourage",
-    description: "These are the people who will stand beside us and help make the day unforgettable.",
+    title: "Our Wedding",
+    description: "Meet the friends and family who will be part of the celebration.",
     items: [],
   },
 ];
@@ -99,8 +103,8 @@ function renderEntourageCard(item: EntourageItem) {
           {item.label}
         </p>
         <div className="mt-2 space-y-1">
-          {item.values.map((value) => (
-            <p key={value} className="text-base leading-relaxed" style={{ color: themeColor }}>
+          {item.values.map((value, index) => (
+            <p key={`${item.label}-${index}`} className="text-base leading-relaxed" style={{ color: themeColor }}>
               {value}
             </p>
           ))}
@@ -117,8 +121,8 @@ function renderEntourageCard(item: EntourageItem) {
             {item.label}
           </p>
           <div className="mt-2 space-y-1">
-            {item.values.map((value) => (
-              <p key={value} className="text-base leading-relaxed" style={{ color: themeColor }}>
+            {item.values.map((value, index) => (
+              <p key={`${item.label}-${index}`} className="text-base leading-relaxed" style={{ color: themeColor }}>
                 {value}
               </p>
             ))}
@@ -129,8 +133,8 @@ function renderEntourageCard(item: EntourageItem) {
             {item.secondaryLabel}
           </p>
           <div className="mt-2 space-y-1">
-            {item.secondaryValues?.map((value) => (
-              <p key={value} className="text-base leading-relaxed" style={{ color: themeColor }}>
+            {item.secondaryValues?.map((value, index) => (
+              <p key={`${item.secondaryLabel}-${index}`} className="text-base leading-relaxed" style={{ color: themeColor }}>
                 {value}
               </p>
             ))}
@@ -170,8 +174,8 @@ function renderEntourageCard(item: EntourageItem) {
           {item.label}
         </p>
         <div className="mt-2 space-y-1">
-          {item.values.map((value) => (
-            <p key={value} className="text-sm leading-relaxed" style={{ color: themeColor }}>
+          {item.values.map((value, index) => (
+            <p key={`${item.label}-${index}`} className="text-sm leading-relaxed" style={{ color: themeColor }}>
               {value}
             </p>
           ))}
@@ -182,8 +186,8 @@ function renderEntourageCard(item: EntourageItem) {
           {item.secondaryLabel}
         </p>
         <div className="mt-2 space-y-1">
-          {item.secondaryValues?.map((value) => (
-            <p key={value} className="text-sm leading-relaxed" style={{ color: themeColor }}>
+          {item.secondaryValues?.map((value, index) => (
+            <p key={`${item.secondaryLabel}-${index}`} className="text-sm leading-relaxed" style={{ color: themeColor }}>
               {value}
             </p>
           ))}
@@ -230,7 +234,7 @@ function WeddingDetailsTabs() {
 
         <div className="mt-6 space-y-3">
           {activeTab === "Entourage"
-            ? entourageItems.map((item) => <div key={item.label}>{renderEntourageCard(item)}</div>)
+            ? entourageItems.map((item, index) => <div key={`${item.label}-${index}`}>{renderEntourageCard(item)}</div>)
             : activeContent.items.map((item) => {
                 const [time, ...rest] = item.value.split("—");
                 const subtitle = rest.join("—").trim();
@@ -261,15 +265,15 @@ function WeddingDetailsTabs() {
                   Map
                 </p>
                 <p className="mt-2 text-base font-semibold" style={{ color: themeColor }}>
-                  Tree House Mansion
+                  [Venue Name]
                 </p>
                 <p className="mt-1 text-sm leading-relaxed" style={{ color: themeColor }}>
-                  5X44+7X5 Lalaan 2, Leynes St, Lalaan 2, Silang, 4118 Cavite
+                  [Street Address, City, Region]
                 </p>
               </div>
               <iframe
-                title="Tree House Mansion Location"
-                src="https://www.google.com/maps?q=Tree%20House%20Mansion%205X44%2B7X5%20Lalaan%202%20Leynes%20St%20Lalaan%202%20Silang%204118%20Cavite&output=embed"
+                title="Wedding venue map"
+                src="https://www.google.com/maps?q=Wedding+venue&output=embed"
                 className="h-64 w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -300,7 +304,7 @@ export default function Home() {
   const [rsvpGuests, setRsvpGuests] = useState<RsvpGuest[]>([
     { id: "guest-1", firstName: "", lastName: "", attending: "yes" },
   ]);
-  const weddingDate = new Date("2026-09-25T09:30:00");
+  const weddingDate = new Date("2027-06-12T15:00:00");
   const [countdownNow, setCountdownNow] = useState<Date>(() => new Date(weddingDate.getTime()));
 
   // Configurable scroll threshold for nav bar visibility (in pixels)
@@ -339,49 +343,12 @@ export default function Home() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const heroSection = containerRef.current.querySelector(".hero-section");
-    const heroText = containerRef.current.querySelector(".hero-text");
-
     // Handle scroll event
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // Animate hero section (background only, no delay)
-    gsap.fromTo(
-      heroSection,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: heroSection,
-          start: "top center",
-          end: "center center",
-          markers: false,
-        },
-      }
-    );
-
-    // Animate hero text with 0.5s delay
-    gsap.fromTo(
-      heroText,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        delay: 0.5,
-        scrollTrigger: {
-          trigger: heroSection,
-          start: "top center",
-          end: "center center",
-          markers: false,
-        },
-      }
-    );
 
     // Animate other sections on scroll
     const sections = containerRef.current.querySelectorAll("section:not(.hero-section)");
@@ -581,16 +548,16 @@ export default function Home() {
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}></div>
           
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}></div>
-          <div className="hero-text absolute z-10 w-1/2" style={{ color: themeColor, opacity: 0, right: 0, top: "50%", transform: "translateY(-50%)", paddingRight: "clamp(0.5rem, 12vw, 14rem)" }}>
-            <h1 className="text-right" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", lineHeight: "1", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)" }}>
-              Luc & Gail
+          <div className="hero-text absolute z-10" style={{ width: "min(90vw, 42rem)", color: themeColor, right: "clamp(1rem, 6vw, 6rem)", top: "50%", transform: "translateY(-50%)" }}>
+            <h1 className="text-right" style={{ color: themeColor, fontFamily: "var(--font-cormorant)", fontSize: "clamp(3.5rem, 8vw, 4.5rem)", fontWeight: 700, letterSpacing: "clamp(0.06em, 0.8vw, 0.2em)", lineHeight: "1", marginBottom: "clamp(0.375rem, 1.5vw, 1rem)", textShadow: "0 1px 10px rgba(255, 255, 240, 0.8)" }}>
+              [Partner One] & [Partner Two]
             </h1>
-            <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, lineHeight: "1", marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 0 0.35px currentColor" }} >
+            <p className="text-right" style={{ color: themeColor, fontFamily: "var(--font-italianno)", fontSize: "clamp(2.5rem, 7vw, 3.75rem)", fontWeight: 400, lineHeight: "1", marginRight: "clamp(0rem, 1vw, 1.125rem)", textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }} >
               are getting married!
             </p>
-            <p className="mt-3 mr-1 text-right text-sm font-semibold uppercase tracking-[0.35em] sm:mr-2 sm:text-base" style={{ color: themeColor }}>
-              <span className="sm:hidden">09.25.26</span>
-              <span className="hidden sm:inline">September 25, 2026</span>
+            <p className="mt-3 mr-1 text-right text-sm font-semibold uppercase tracking-[0.35em] sm:mr-2 sm:text-base" style={{ color: themeColor, textShadow: "0 1px 8px rgba(255, 255, 240, 0.8)" }}>
+              <span className="sm:hidden">06.12.27*</span>
+              <span className="hidden sm:inline">June 12, 2027 (sample date)</span>
             </p>
           </div>
         </div>
@@ -610,6 +577,7 @@ export default function Home() {
               alt="Story photo 3"
               width={1200}
               height={1600}
+              unoptimized
               className="h-full w-full object-cover"
             />
           </div>
@@ -622,6 +590,7 @@ export default function Home() {
                   alt="Story photo 2"
                   width={1600}
                   height={900}
+                  unoptimized
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -631,6 +600,7 @@ export default function Home() {
                   alt="Story photo 1"
                   width={900}
                   height={1200}
+                  unoptimized
                   className="h-56 w-full object-cover sm:h-72"
                 />
               </div>
@@ -640,6 +610,7 @@ export default function Home() {
                   alt="Story photo 4"
                   width={900}
                   height={1200}
+                  unoptimized
                   className="h-56 w-full object-cover sm:h-72"
                 />
               </div>
@@ -651,6 +622,7 @@ export default function Home() {
                 alt="Story photo 5"
                 width={1600}
                 height={900}
+                unoptimized
                 className="h-56 w-full object-cover sm:h-72"
               />
             </div>
@@ -713,13 +685,13 @@ export default function Home() {
           </p>
           <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed" style={{ color: "#000000" }}>
             <p>
-              We would be delighted to have you join us in your finest attire, dressed in the following colors, as we celebrate this special occasion in elegance, beauty, and harmony.
+              [Add a short description of the dress code and the tone of your celebration.]
             </p>
             <p>
-              Gentlemen are invited to wear a black suit, coat, or long-sleeved dress shirt with a tie, while ladies are encouraged to wear long, elegant dresses in satin or other formal fabrics.
+              [Add any specific attire guidance for your guests.]
             </p>
             <p>
-              In keeping with the spirit of 1 Timothy 2:9, we kindly request modest and dignified attire and grooming.
+              [Add any additional dress-code notes, or remove this paragraph.]
             </p>
           </div>
 
@@ -729,9 +701,9 @@ export default function Home() {
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-start">
               {[
-                { color: "#E4BEB4", name: "Rose Pink" },
-                { color: "#DA979B", name: "Dusty Rose" },
-                { color: "#926063", name: "Muted Mauve" },
+                { color: "#E4BEB4", name: "Sample Color 1" },
+                { color: "#DA979B", name: "Sample Color 2" },
+                { color: "#926063", name: "Sample Color 3" },
               ].map((swatch) => (
                 <div key={swatch.color} className="flex flex-1 items-center justify-start gap-3 rounded-2xl bg-white/80 px-4 py-4 shadow-sm">
                   <div className="h-10 w-10 rounded-full" style={{ backgroundColor: swatch.color }} />
@@ -755,7 +727,7 @@ export default function Home() {
               WEDDING REMINDERS
             </p>
             <h2 className="text-1xl md:text-2xl font-light tracking-wide" style={{ color: themeColor }}>
-              Please Read Before the Ceremony
+              Please Read Before the Event
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed" style={{ color: themeColor }}>
               A few important notes to help make the day meaningful, respectful, and enjoyable for everyone.
@@ -767,32 +739,32 @@ export default function Home() {
               {
                 question: "What time should I arrive?",
                 answer:
-                  "Please arrive at least one hour before the ceremony. To maintain the reverence of the occasion, guests arriving after the ceremony begins will be asked to wait until after the opening prayer before entering the hall.",
+                  "[Add the recommended arrival time and any entry instructions.]",
               },
               {
                 question: "Can I bring a plus one?",
                 answer:
-                  "Due to limited seating, we can only accommodate guests named on the invitation. If you have a plus one, it will be indicated on your invitation. Thank you for understanding.",
+                  "[Explain your guest and plus-one policy.]",
               },
               {
                 question: "Can I take photos during the ceremony?",
                 answer:
-                  "We kindly request an unplugged ceremony. Please refrain from taking photos or videos during the wedding procession and ceremony, especially near the aisle, and allow our professional photographers to capture these precious moments. Thank you for helping us keep the ceremony reverent and distraction-free.",
+                  "[Add your preferences for guest photography and video.]",
               },
               {
                 question: "Are children welcome?",
                 answer:
-                  "Our wedding is an adults-only celebration, except for immediate family members who are part of the wedding.",
+                  "[Add your note about children or age restrictions.]",
               },
               {
                 question: "What if I can't attend?",
                 answer:
-                  "If you're unable to attend in person, please let us know as soon as possible. We'll be sharing a Zoom link so you can still celebrate with us from wherever you are.",
+                  "[Add instructions for guests who cannot attend in person.]",
               },
               {
-                question: "Will rice or confetti be thrown?",
+                question: "Are there any event traditions guests should know about?",
                 answer:
-                  "No. As one of Jehovah's Witnesses, we do not include traditions such as throwing rice or confetti.",
+                  "[Add any event traditions or activities guests should know about.]",
               },
             ].map((item) => (
               <div key={item.question} className="rounded-[1.5rem] border border-[#521322]/10 bg-[#FFF1E1]/60 p-6 text-left shadow-sm">
@@ -821,14 +793,6 @@ export default function Home() {
               We truly appreciate your response and are so grateful to celebrate with you.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <a
-                href="/files/Luc & Gail's RSVP.pdf"
-                download
-                className="rounded-full px-6 py-3 font-semibold transition-colors"
-                style={{ backgroundColor: themeColor, color: "white" }}
-              >
-                Download RSVP
-              </a>
               <button
                 type="button"
                 onClick={closeRsvpModal}
@@ -850,10 +814,10 @@ export default function Home() {
               A note on <span style={{ fontFamily: "var(--font-italianno)", fontSize: "2em", fontWeight: 700 }}>Gifts</span>
             </h2>
             <p className="mx-auto max-w-2xl text-lg md:text-xl font-light leading-relaxed" style={{ color: themeColor }}>
-              Your presence at our celebration is the gift we truly treasure. Should you wish to give, cash gifts will help us as we begin the new life we have been preparing for together.
+              Your presence at our celebration is the gift we truly treasure. [Add a note about gifts or your registry.]
             </p>
             <p className="mt-6 text-base font-medium tracking-[0.25em]" style={{ color: themeColor }}>
-              Should you wish to share a gift, you may do so through the following bank accounts.
+              [Add gift or registry details below, or remove this section.]
             </p>
           </div>
 
@@ -861,30 +825,30 @@ export default function Home() {
             {[
               {
                 image: "/images/bdo.jpg",
-                accountNumber: "003509000007",
-                accountName: "Luc Linus T. Blanca",
+                accountNumber: "[Account Number]",
+                accountName: "[Account Holder]",
                 label: "BDO",
               },
               {
                 image: "/images/unionbank.jpg",
-                accountNumber: "109486437456",
-                accountName: "Giland Gail Briones",
+                accountNumber: "[Account Number]",
+                accountName: "[Account Holder]",
                 label: "UnionBank",
               },
               {
                 image: "/images/gcash.jpg",
-                accountNumber: "09669808035",
-                accountName: "Luc Linus T. Blanca",
+                accountNumber: "[Account Number]",
+                accountName: "[Account Holder]",
                 label: "GCash",
               },
               {
                 image: "/images/gotyme.jpg",
-                accountNumber: "017211753257",
-                accountName: "Giland Gail Briones",
+                accountNumber: "[Account Number]",
+                accountName: "[Account Holder]",
                 label: "GoTyme",
               },
             ].map((account) => (
-              <div key={account.accountNumber} className="flex flex-col gap-4 rounded-[1.75rem] border border-[#521322]/15 bg-white/90 p-6 shadow-sm sm:flex-row sm:items-center">
+              <div key={account.label} className="flex flex-col gap-4 rounded-[1.75rem] border border-[#521322]/15 bg-white/90 p-6 shadow-sm sm:flex-row sm:items-center">
                 <div className="ml-3 sm:ml-0 flex h-28 w-28 sm:h-20 sm:w-20 flex-none items-center justify-center overflow-hidden rounded-xl bg-[#FFF1E1]/80">
                   <Image
                     src={account.image}
@@ -1079,15 +1043,6 @@ export default function Home() {
             >
               {isSubmittingRsvp ? "Sending..." : "Send RSVP"}
             </button>
-
-            <a
-              href="/files/Luc & Gail's RSVP.pdf"
-              download
-              className="block text-center text-sm font-semibold underline transition-opacity hover:opacity-80"
-              style={{ color: themeColor }}
-            >
-              Download soft copy of RSVP
-            </a>
 
             {rsvpStatus ? (
               <p className="text-center text-sm font-medium" style={{ color: themeColor }} aria-live="polite">
